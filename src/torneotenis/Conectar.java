@@ -1,0 +1,38 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package torneotenis;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author Administrador
+ */
+public class Conectar {
+    Connection conn = null;
+    private String url = "jdbc:mysql://localhost/torneotenis";
+
+    public Conectar() {
+    }
+  
+    public Connection getConexion(){
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection(url, "root", "");        
+            System.out.println("Conexión establecida con éxito");
+        } 
+        catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Error al cargar drivers");
+        }
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectar");
+        }
+        return conn;
+    }
+}
