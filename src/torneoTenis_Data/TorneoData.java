@@ -10,13 +10,18 @@ import torneotenis.Conectar;
 
 /**
  *
- * @author rataq
+ * @author Familia
  */
-public class JugadorData {
+public class TorneoData {
     private Connection conn = null;
     
-    public JugadorData(Conectar conexionJugador){
-        this.conn = (Connection) conexionJugador.getConexion();
+    public TorneoData(Conectar conexionTorneo){
+        this.conn = (Connection) conexionTorneo.getConexion();
     }
+    
+    public void calcularRanking(int partGanados){
+        
+    }
+    
     
 }

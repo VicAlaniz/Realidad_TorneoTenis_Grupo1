@@ -10,13 +10,16 @@ import torneotenis.Conectar;
 
 /**
  *
- * @author rataq
+ * @author Familia
  */
-public class JugadorData {
+public class SponsorData {
     private Connection conn = null;
     
-    public JugadorData(Conectar conexionJugador){
-        this.conn = (Connection) conexionJugador.getConexion();
+    public SponsorData(Conectar conexionSponsor){
+        this.conn = (Connection) conexionSponsor.getConexion();
     }
     
+    public void guardarIndumentaria(){
+        
+    }
 }
