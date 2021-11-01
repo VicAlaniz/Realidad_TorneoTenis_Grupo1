@@ -13,7 +13,7 @@ import java.time.LocalDate;
  */
 public class Jugador {
     private int id_jugador;
-    private String nombre;
+    private String nombreApellido;
     private int dni;
     private LocalDate fechaNac;
     private float altura;
@@ -23,7 +23,7 @@ public class Jugador {
     private boolean activo;
 
     public Jugador(String nombre, int dni, LocalDate fechaNac, float altura, float peso, String estilo, String manoHabil, boolean activo) {
-        this.nombre = nombre;
+        this.nombreApellido = nombre;
         this.dni = dni;
         this.fechaNac = fechaNac;
         this.altura = altura;
@@ -35,7 +35,7 @@ public class Jugador {
 
     public Jugador(int id_jugador, String nombre, int dni, LocalDate fechaNac, float altura, float peso, String estilo, String manoHabil, boolean activo) {
         this.id_jugador = id_jugador;
-        this.nombre = nombre;
+        this.nombreApellido = nombre;
         this.dni = dni;
         this.fechaNac = fechaNac;
         this.altura = altura;
@@ -56,12 +56,12 @@ public class Jugador {
         this.id_jugador = id_jugador;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreApellido() {
+        return nombreApellido;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreApellido(String nombre) {
+        this.nombreApellido = nombre;
     }
 
     public int getDni() {
@@ -122,7 +122,7 @@ public class Jugador {
 
     @Override
     public String toString() {
-        return "Jugador: " + nombre;
+        return "Jugador: " + nombreApellido;
     }
     
     
