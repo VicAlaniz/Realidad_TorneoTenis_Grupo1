@@ -6,8 +6,10 @@
 package torneoTenis_Data;
 
 import java.sql.Connection;
+import java.util.List;
 import torneotenis.Conectar;
 import torneotenis.Estadio;
+import torneotenis.Sponsor;
 
 /**
  *
@@ -20,18 +22,24 @@ public class EstadioData {
         this.conn = (Connection) conexionEstadio.getConexion();
     }
     
-    public void registrarEstadio(Estadio est){
+    public void guardarEstadio(Estadio est){
         
     }
     
-    public Estadio consultarEstadio(int id_estadio){
+    public Estadio buscarEstadio(String nombreEstadio){
         
         Estadio est = null;
         
         return est;
     }
     
-    public void modificarEstadio(Estadio est){
+    public void actualizarEstadio(Estadio est){
         
     }
+      public List<Estadio> listaDeEstadios() {
+        
+    }
+    public void borrarEstadio(int id_estadio){
+        
+    }  
 }

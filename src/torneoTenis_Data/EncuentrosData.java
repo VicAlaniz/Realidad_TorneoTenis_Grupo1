@@ -17,6 +17,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import torneotenis.Conectar;
 import torneotenis.Encuentros;
+import torneotenis.Jugador;
+import torneotenis.Torneo;
 
 /**
  *
@@ -55,12 +57,15 @@ public class EncuentrosData {
     public void guardarTantos(){
         
     }
-    
-    public void modificarFechaEnc(){
+    public void ganadorEncuentro(int id_jugador) {
         
     }
     
-    public List<Encuentros> listaDeEncuentros(){
+    public void actualizarEncuentro(int id_encuentro){
+        
+    }
+    
+    public List<Encuentros> listaDeEncuentros(int estadoEnCurso){
         
         ArrayList<Encuentros> listaDeEncuentros = new ArrayList<>();
         
@@ -91,5 +96,20 @@ public class EncuentrosData {
             JOptionPane.showMessageDialog(null, "ERROR \nNo hay Encuentros");   
         }
         return listaDeEncuentros;
+    }
+
+    public List<Encuentros> listaEncuentrosXJugador(int id_jugador){
+        
+        return list;
+    }
+    
+    public List<Jugador> listaJugadoresXTorneo(int id_torneo){
+        
+    }
+    public List<Torneo> listaTorneosXJugador(int id_jugador){
+        
+    }
+     public void calcularRanking(int ganador){
+        
     }
 }

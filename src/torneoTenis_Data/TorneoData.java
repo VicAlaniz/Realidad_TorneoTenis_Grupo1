@@ -6,7 +6,9 @@
 package torneoTenis_Data;
 
 import java.sql.Connection;
+import java.util.List;
 import torneotenis.Conectar;
+import torneotenis.Torneo;
 
 /**
  *
@@ -19,9 +21,21 @@ public class TorneoData {
         this.conn = (Connection) conexionTorneo.getConexion();
     }
     
-    public void calcularRanking(int partGanados){
-        
-    }
-    
-    
+   public void guardarTorneo(Torneo t) {
+       
+   }
+   
+   public void actualizarTorneo(int id_torneo){
+       
+   }
+   
+   public List<Torneo> listarTorneos(int id_torneo) {
+       
+   }
+   public void borrarTorneo(int id_torneo) {
+       
+   } 
+   public Torneo buscarTorneo(String nombreTorneo) {
+       
+   }
 }

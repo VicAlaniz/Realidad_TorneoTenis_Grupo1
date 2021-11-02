@@ -6,7 +6,9 @@
 package torneoTenis_Data;
 
 import java.sql.Connection;
+import java.util.List;
 import torneotenis.Conectar;
+import torneotenis.Sponsor;
 
 /**
  *
@@ -19,7 +21,19 @@ public class SponsorData {
         this.conn = (Connection) conexionSponsor.getConexion();
     }
     
-    public void guardarIndumentaria(){
+    public void guardarSponsor() {
+        
+    }
+    public void actualizarSponsor(int id_sponsor){
+        
+    }
+    public void borrarSponsor(int id_sponsor) {
+        
+    }
+    public Sponsor buscarSponsor(String nombreSponsor){
+        
+    }
+    public List<Sponsor> listaDeSponsors() {
         
     }
 }

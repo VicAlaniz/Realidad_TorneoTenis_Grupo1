@@ -19,7 +19,9 @@ public class PatrocinioData {
         this.conn = (Connection) conexionPatrocinio.getConexion();
     }
     
-    public void guardarMarca(){
-        
+    public void guardarPatrocinio(){
+        jugador 
+                id_sponsor
+                patrocinio(ju, )
     }
 }
