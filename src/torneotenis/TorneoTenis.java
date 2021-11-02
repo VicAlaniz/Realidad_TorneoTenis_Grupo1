@@ -5,6 +5,7 @@
  */
 package torneotenis;
 
+import static java.lang.Float.parseFloat;
 import java.time.LocalDate;
 import torneoTenis_Data.EncuentrosData;
 import torneoTenis_Data.EstadioData;
@@ -43,10 +44,12 @@ public class TorneoTenis {
         //jd.eliminarJugador(34951362);
         //jd.buscarJugador("Vicky Alaniz");
         //p.setActivo(true);
-        //jd.actualizarJugador(p);
+        v.setPeso((float) 63.7);
+        v.setAltura((float) 1.65);
+        jd.actualizarJugador(v);
        
-        jd.listaDeJugadores();
-        System.out.println("lista: "+jd.listaDeJugadores());
+        //jd.listaDeJugadores();
+        //System.out.println("lista: "+jd.listaDeJugadores());
         
         //jd.buscarJugador("Pato Baigorria");
         //System.out.println(p.getNombreApellido()+"\n"+p.getDni()+"\n"+p.getManoHabil());
