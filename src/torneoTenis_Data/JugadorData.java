@@ -28,7 +28,7 @@ public class JugadorData {
         this.conn = (Connection) conexionJugador.getConexion();
     }
     
-    public void RegistrarJugador(Jugador jugador){
+    public void registrarJugador(Jugador jugador){
         String query = "INSERT INTO jugador(nombreApellido, dni, fechaNac, altura, peso, estilo, manoHabil, activo)VALUES (?,?,?,?,?,?,?,?)";
 
         try{
@@ -55,7 +55,7 @@ public class JugadorData {
           }
     }
 
-    public Jugador BuscarJugador(String tenista){
+    public Jugador buscarJugador(String tenista){
         Jugador j = null;
         
         String query = "SELECT * FROM jugador WHERE nombreApellido = ?";
@@ -83,12 +83,12 @@ public class JugadorData {
         return j;
     }
     
-    public void ActualizarJugador(Jugador t){
+    public void actualizarJugador(Jugador t){
         String query = "UPDATE jugador SET nombreApellido = ?, dni = ?, fechaNac = ?, altura = ?, peso = ?, estilo = ?, manoHabil = ?, activo = ?  WHERE id_jugador = ?";
         
         try{
-            PreparedStatement ps = conn.prepareStatement(query, 0);
-            ps.setInt(9, t.getId_jugador());
+            PreparedStatement ps = conn.prepareStatement(query);
+            
                 ps.setString(1, t.getNombreApellido());
                 ps.setInt(2, t.getDni());
                 ps.setDate(3, Date.valueOf(t.getFechaNac()));
@@ -97,7 +97,8 @@ public class JugadorData {
                 ps.setString(6, t.getEstilo());
                 ps.setString(7, t.getManoHabil());
                 ps.setBoolean(8, t.isActivo());
-
+                ps.setInt(9, t.getId_jugador());
+                
                 ps.executeUpdate();
 
             if(ps.executeUpdate()>0){
@@ -105,18 +106,18 @@ public class JugadorData {
             }else{
                 JOptionPane.showMessageDialog(null, "Error al Intentar Actualizar el jugador");
              }
-                ps.close();
+            ps.close();
         }catch (SQLException ex){
                 JOptionPane.showMessageDialog(null, "ERROR \nJugador No Encontrado");
          }
     }
     
-    public void EliminarJugador(Jugador player){
-        String query = "UPDATE jugador SET activo = false WHERE id_jugador = ?";
+    public void eliminarJugador(int dni){
+        String query = "UPDATE jugador SET activo = false WHERE dni = ?";
         
         try{
-            PreparedStatement ps = conn.prepareStatement(query, 0);
-            ps.setInt(1, player.getId_jugador());
+            PreparedStatement ps = conn.prepareStatement(query, dni);
+            ps.setInt(1, dni);
             if(ps.executeUpdate()>0){
                 JOptionPane.showMessageDialog(null, "Jugador Eliminado Exitosamente");
             }else{
@@ -128,7 +129,7 @@ public class JugadorData {
          }
     }
     
-    public List<Jugador> ListaDeJugadores(){
+    public List<Jugador> listaDeJugadores(){
         ArrayList<Jugador> listaDeJugadores = new ArrayList<>();
         
         String query = "SELECT * FROM jugador WHERE activo = true";
