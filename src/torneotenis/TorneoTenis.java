@@ -42,11 +42,13 @@ public class TorneoTenis {
         //jd.registrarJugador(v);
         //jd.registrarJugador(p);
         //jd.eliminarJugador(34951362);
-        //jd.buscarJugador("Vicky Alaniz");
+        //jd.buscarJugador(v);
+        System.out.println(jd.buscarJugador(34951362));
+        
         //p.setActivo(true);
-        v.setPeso((float) 63.7);
-        v.setAltura((float) 1.65);
-        jd.actualizarJugador(v);
+        //v.setPeso((float) 63.7);
+        //v.setAltura((float) 1.65);
+        //jd.actualizarJugador(v);
        
         //jd.listaDeJugadores();
         //System.out.println("lista: "+jd.listaDeJugadores());

@@ -57,11 +57,14 @@ public class EncuentrosData {
     public void guardarTantos(){
         
     }
+    public Encuentros buscarEncuentro(int id_encuentros){
+        
+    }
     public void ganadorEncuentro(int id_jugador) {
         
     }
     
-    public void actualizarEncuentro(int id_encuentro){
+    public void actualizarEncuentro(Encuentros enc){
         
     }
     

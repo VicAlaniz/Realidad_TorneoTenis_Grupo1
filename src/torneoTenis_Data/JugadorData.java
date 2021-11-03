@@ -55,13 +55,13 @@ public class JugadorData {
           }
     }
 
-    public Jugador buscarJugador(String tenista){
+    public Jugador buscarJugador(int dni){
         Jugador j = null;
         
-        String query = "SELECT * FROM jugador WHERE nombreApellido = ?";
+        String query = "SELECT * FROM jugador WHERE dni = ?";
         try{
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, tenista);
+            ps.setInt(1, dni);
             ResultSet rst = ps.executeQuery();
             
             while(rst.next()){

@@ -6,7 +6,10 @@
 package torneoTenis_Data;
 
 import java.sql.Connection;
+import java.util.List;
 import torneotenis.Conectar;
+import torneotenis.Patrocinio;
+
 
 /**
  *
@@ -19,9 +22,22 @@ public class PatrocinioData {
         this.conn = (Connection) conexionPatrocinio.getConexion();
     }
     
-    public void guardarPatrocinio(){
+    public void guardarPatrocinio(Patrocinio p){
         jugador 
                 id_sponsor
                 patrocinio(ju, )
+    }
+    
+    public Patrocinio buscarPatrocinio(int id_patrocinio) {
+        
+    }
+    public void actualizarPatrocinio(Patrocinio p) {
+        
+    }
+    public void borrarPatrocinio(int id_patrocinio) {
+        
+    }
+      public List<Patrocinio> listaDePatrocinios() {
+        
     }
 }
