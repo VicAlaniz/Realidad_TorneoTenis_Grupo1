@@ -5,7 +5,6 @@
  */
 package torneotenis;
 
-import static java.lang.Float.parseFloat;
 import java.time.LocalDate;
 import torneoTenis_Data.EncuentrosData;
 import torneoTenis_Data.EstadioData;
@@ -43,7 +42,7 @@ public class TorneoTenis {
         //jd.registrarJugador(p);
         //jd.eliminarJugador(34951362);
         //jd.buscarJugador(v);
-        System.out.println(jd.buscarJugador(34951362));
+        //System.out.println(jd.buscarJugador(34951362));
         
         //p.setActivo(true);
         //v.setPeso((float) 63.7);
@@ -59,9 +58,10 @@ public class TorneoTenis {
         
         //GUARDAR ESTADIO
         
-        Estadio co = new Estadio (6, "Cordoba Open", "Córdoba", 1546, 12698, "Cesped", true, "La Ribera", 15000, true );
+        //Estadio co = new Estadio ("Cordoba Open", "Córdoba", 1546, 12698, "Cesped", true, "La Ribera", 15000, true);
+        Estadio co2 = new Estadio ("Cordoba Open", "Córdoba", 1546, 12698, "Cesped", true, "La Ribera", 15000, true);
         
-        //esd.guardarEstadio(co);
+        //esd.guardarEstadio(co2);
         
         //BUSCAR ESTADIO
         //esd.buscarEstadio("Cordoba Open");
@@ -82,7 +82,7 @@ public class TorneoTenis {
         //esd.listaDeEstadios();
         //System.out.println("Lista de Estadios: "+esd.listaDeEstadios());
         
-        Torneo us = new Torneo ("Torneo US Open", LocalDate.of(2021, 1, 1), LocalDate.of(2021, 12, 1), true );
+        Torneo us = new Torneo ("US Open", LocalDate.of(2021, 1, 1), LocalDate.of(2021, 12, 1), true );
         //GUARDAR TORNEO
         //td.guardarTorneo(us);
         //BUSCAR
@@ -91,15 +91,30 @@ public class TorneoTenis {
         //ACTUALIZAR
         //us.setFecha_ini(LocalDate.of(2021, 11, 1));
         //us.setNombre("US Open");
+        //us.setActivo(false);
         //td.actualizarTorneo(us);
         //LISTAR TORNEOS
        //td.listaDeTorneos();
         //System.out.println("Lista de Torneos: "+td.listaDeTorneos());
         //BORRAR TORNEOS
-        td.borrarTorneo(4);
+        //td.borrarTorneo(4);
         
+        Sponsor va = new Sponsor("Nike", "Remeras", true);
+        //Sponsor pb = new Sponsor(7, "Adidas", "Zapatillas", true);
+        //sd.guardarSponsor(pb);
+       //System.out.println(sd.buscarSponsor("Nike"));
+       //pb.setIndumentaria("Ropa");
+       //sd.actualizarSponsor(pb);
+        //System.out.println("Sponsor: " + sd.listaDeSponsors());
+        //sd.borrarSponsor(7);
         
-       
+        Encuentros enc = new Encuentros(LocalDate.of(2021, 11, 11), 2, v, v, p, co2, us, true);
+        //ed.guardarEncuentros(enc);
+        Jugador vic = pd.buscarJugador(24);
+        Sponsor va1 = pd.buscarSponsor(7);
+        
+        Patrocinio pat = new Patrocinio(va1, vic, true);
+        pd.guardarPatrocinio(pat);
         
     }
     

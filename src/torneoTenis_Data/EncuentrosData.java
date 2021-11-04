@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -26,19 +25,30 @@ import torneotenis.Torneo;
  */
 public class EncuentrosData {
     private Connection conn = null;
+    private JugadorData jd = null;
+    private TorneoData td = null;
+    private EstadioData ed = null;
     
-    public EncuentrosData(Conectar conexionEncuentros){
-        this.conn = (Connection) conexionEncuentros.getConexion();
+    public EncuentrosData(Conectar conn){
+        this.conn = (Connection) conn.getConexion();
+        jd = new JugadorData(conn);
+        td = new TorneoData(conn);
+        ed = new EstadioData(conn);
+        
     }
     
     public void guardarEncuentros(Encuentros enc){
-        String query = "INSERT INTO encuentros(fechaEnc, estadoEnCurso, ganador, activo)VALUES (?,?,?,?)";
+        String query = "INSERT INTO encuentros (fechaEnc, estadoEnCurso, ganador, id_jugador1, id_jugador2, id_estadio, id_torneo, activo) VALUES (?,?,?,?,?,?,?,?)";
         
         try{
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setDate(2, Date.valueOf(enc.getFechaEnc()));
-            ps.setInt(3, enc.getEstadoEnCurso());
-            ps.setInt(4, enc.getGanador());
+            ps.setDate(1, Date.valueOf(enc.getFechaEnc()));
+            ps.setInt(2, enc.getEstadoEnCurso());
+            ps.setInt(3, enc.getGanador().getId_jugador());
+            ps.setInt(4, enc.getJugador1().getId_jugador());
+            ps.setInt(5, enc.getJugador2().getId_jugador());
+            ps.setInt(6, enc.getEstadio().getId_estadio());
+            ps.setInt(7, enc.getTorneo().getId_torneo());
             ps.setBoolean(8, enc.isActivo());
             
             ps.executeUpdate();
@@ -50,15 +60,33 @@ public class EncuentrosData {
             }
             ps.close();
         } catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, "ERROR \nEncuentro No Guardado");
+            JOptionPane.showMessageDialog(null, "ERROR \nEncuentro No Guardado"+ex.getMessage());
         }
     }
     
-    public void guardarTantos(){
+    public Encuentros buscarEncuentro(int id){
+         Encuentros e = new Encuentros();
         
-    }
-    public Encuentros buscarEncuentro(int id_encuentros){
-        
+        String query = "SELECT * FROM encuentros WHERE id_encuentro = ?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+
+                e.setId_encuentro(rs.getInt("id_encuentro"));
+                e.setFechaEnc(rs.getDate("fechaEnc").toLocalDate());
+                e.setEstadoEnCurso(rs.getInt("estadoEnCurso"));
+                e.setGanador(rs.getInt("ganador"));
+                e.setJugador1(rs.getInt());
+                e.setActivo(rs.getBoolean("activo"));
+            }
+            ps.close();
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "ERROR \nSponsor no encontrado");
+         }
+        return s; 
     }
     public void ganadorEncuentro(int id_jugador) {
         

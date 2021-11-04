@@ -15,7 +15,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import torneotenis.Conectar;
 import torneotenis.Estadio;
-import torneotenis.Sponsor;
 
 /**
  *
@@ -29,7 +28,7 @@ public class EstadioData {
     }
     
     public void guardarEstadio(Estadio est){
-        String query = "INSERT INTO estadio(nombre, ciudad, ancho, largo, categoria, habilitado, direccion, capacidad, activo)VALUES (?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO estadio(nombre, ciudad, ancho, largo, categoria, habilitado, direccion, capacidad, activo) VALUES (?,?,?,?,?,?,?,?,?)";
 
         try{
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);

@@ -15,14 +15,14 @@ public class Encuentros {
     private int id_encuentro;
     private LocalDate fechaEnc;
     private int estadoEnCurso;
-    private int ganador;
+    private Jugador ganador;
     private Jugador jugador1;
     private Jugador jugador2;
     private Estadio estadio;
     private Torneo torneo;
     private boolean activo;
 
-    public Encuentros(int id_encuentro, LocalDate fechaEnc, int estadoEnCurso, int ganador, Jugador jugador1, Jugador jugador2, Estadio estadio, Torneo torneo, boolean activo) {
+    public Encuentros(int id_encuentro, LocalDate fechaEnc, int estadoEnCurso, Jugador ganador, Jugador jugador1, Jugador jugador2, Estadio estadio, Torneo torneo, boolean activo) {
         this.id_encuentro = id_encuentro;
         this.fechaEnc = fechaEnc;
         this.estadoEnCurso = estadoEnCurso;
@@ -34,7 +34,7 @@ public class Encuentros {
         this.activo = activo;
     }
 
-    public Encuentros(LocalDate fechaEnc, int estadoEnCurso, int ganador, Jugador jugador1, Jugador jugador2, Estadio estadio, Torneo torneo, boolean activo) {
+    public Encuentros(LocalDate fechaEnc, int estadoEnCurso, Jugador ganador, Jugador jugador1, Jugador jugador2, Estadio estadio, Torneo torneo, boolean activo) {
         this.fechaEnc = fechaEnc;
         this.estadoEnCurso = estadoEnCurso;
         this.ganador = ganador;
@@ -72,11 +72,11 @@ public class Encuentros {
         this.estadoEnCurso = estadoEnCurso;
     }
 
-    public int getGanador() {
+    public Jugador getGanador() {
         return ganador;
-    }
+    } 
 
-    public void setGanador(int ganador) {
+    public void setGanador(Jugador ganador) {
         this.ganador = ganador;
     }
 

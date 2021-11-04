@@ -29,7 +29,7 @@ public class TorneoData {
     }
     
    public void guardarTorneo(Torneo t) {
-       String query = "INSERT INTO torneos(nombre, fecha_ini, fecha_fin, activo)VALUES (?,?,?,?)";
+       String query = "INSERT INTO torneos (nombre, fecha_ini, fecha_fin, activo) VALUES (?,?,?,?)";
 
         try{
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
