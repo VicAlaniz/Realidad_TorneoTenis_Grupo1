@@ -79,9 +79,24 @@ public class TorneoTenis {
         //esd.borrarEstadio(6);
         
         //LISTAR ESTADIOS
-        esd.listaDeEstadios();
-        System.out.println("Lista de Estadios: "+esd.listaDeEstadios());
+        //esd.listaDeEstadios();
+        //System.out.println("Lista de Estadios: "+esd.listaDeEstadios());
         
+        Torneo us = new Torneo ("Torneo US Open", LocalDate.of(2021, 1, 1), LocalDate.of(2021, 12, 1), true );
+        //GUARDAR TORNEO
+        //td.guardarTorneo(us);
+        //BUSCAR
+        //td.buscarTorneo("Torneo US Open");
+        //System.out.println(td.buscarTorneo("Torneo US Open"));
+        //ACTUALIZAR
+        //us.setFecha_ini(LocalDate.of(2021, 11, 1));
+        //us.setNombre("US Open");
+        //td.actualizarTorneo(us);
+        //LISTAR TORNEOS
+       //td.listaDeTorneos();
+        //System.out.println("Lista de Torneos: "+td.listaDeTorneos());
+        //BORRAR TORNEOS
+        td.borrarTorneo(4);
         
         
        
