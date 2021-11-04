@@ -57,6 +57,35 @@ public class TorneoTenis {
         //System.out.println(p.getNombreApellido()+"\n"+p.getDni()+"\n"+p.getManoHabil());
         //System.out.println("jugadoras Guardadas");
         
+        //GUARDAR ESTADIO
+        
+        Estadio co = new Estadio (6, "Cordoba Open", "Córdoba", 1546, 12698, "Cesped", true, "La Ribera", 15000, true );
+        
+        //esd.guardarEstadio(co);
+        
+        //BUSCAR ESTADIO
+        //esd.buscarEstadio("Cordoba Open");
+        //System.out.println(esd.buscarEstadio("Cordoba Open"));
+        
+        //ACTUALIZAR ESTADIO
+        
+        //co.setDireccion("Maipu");
+        //co.setCategoria("Ladrillo");
+        //co.setAncho((float) 9.60);
+        //co.setLargo((float) 23.77);
+        //esd.actualizarEstadio(co);
+        
+        //BORRAR ESTADIO
+        //esd.borrarEstadio(6);
+        
+        //LISTAR ESTADIOS
+        esd.listaDeEstadios();
+        System.out.println("Lista de Estadios: "+esd.listaDeEstadios());
+        
+        
+        
+       
+        
     }
     
     
