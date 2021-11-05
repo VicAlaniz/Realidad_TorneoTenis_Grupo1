@@ -26,6 +26,10 @@ public class SponsorData {
     public SponsorData(Conectar conexionSponsor){
         this.conn = (Connection) conexionSponsor.getConexion();
     }
+
+    SponsorData() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public void guardarSponsor(Sponsor s) {
         String query = "INSERT INTO sponsor(marca, indumentaria, activo)VALUES (?,?,?)";
@@ -95,6 +99,28 @@ public class SponsorData {
         try{
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, marca);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+
+                s.setId_sponsor(rs.getInt("id_sponsor"));
+                s.setMarca(rs.getString("marca"));
+                s.setIndumentaria(rs.getString("indumentaria"));
+                s.setActivo(rs.getBoolean("activo"));
+            }
+            ps.close();
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "ERROR \nSponsor no encontrado");
+         }
+        return s;
+    }
+      public Sponsor buscarSponsor(int id){
+                Sponsor s = new Sponsor();
+        
+        String query = "SELECT * FROM sponsor WHERE id_sponsor = ?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){

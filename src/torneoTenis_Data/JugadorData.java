@@ -27,6 +27,10 @@ public class JugadorData {
     public JugadorData(Conectar conexionJugador){
         this.conn = (Connection) conexionJugador.getConexion();
     }
+
+    JugadorData() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public void registrarJugador(Jugador jugador){
         String query = "INSERT INTO jugador(nombreApellido, dni, fechaNac, altura, peso, estilo, manoHabil, activo)VALUES (?,?,?,?,?,?,?,?)";
@@ -82,7 +86,33 @@ public class JugadorData {
          }
         return j;
     }
-    
+    public Jugador buscarJugadorXId(int id){
+        Jugador j = null;
+        
+        String query = "SELECT * FROM jugador WHERE id_jugador = ?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id);
+            ResultSet rst = ps.executeQuery();
+            
+            while(rst.next()){
+                j = new Jugador();
+                j.setId_jugador(rst.getInt("id_jugador"));
+                j.setNombreApellido(rst.getString("nombreApellido"));
+                j.setDni(rst.getInt("dni"));
+                j.setFechaNac(rst.getDate("fechaNac").toLocalDate());
+                j.setAltura(rst.getFloat("altura"));
+                j.setPeso(rst.getFloat("peso"));
+                j.setEstilo(rst.getString("estilo"));
+                j.setManoHabil(rst.getString("manoHabil"));
+                j.setActivo(rst.getBoolean("activo"));
+            }
+            ps.close();
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "ERROR \nJugador No Encontrado");
+         }
+        return j;
+    }
     public void actualizarJugador(Jugador t){
         String query = "UPDATE jugador SET nombreApellido = ?, dni = ?, fechaNac = ?, altura = ?, peso = ?, estilo = ?, manoHabil = ?, activo = ?  WHERE id_jugador = ?";
         

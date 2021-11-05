@@ -110,8 +110,8 @@ public class TorneoTenis {
         
         Encuentros enc = new Encuentros(LocalDate.of(2021, 11, 11), 2, v, v, p, co2, us, true);
         //ed.guardarEncuentros(enc);
-        Jugador vic = pd.buscarJugador(24);
-        Sponsor va1 = pd.buscarSponsor(7);
+        Jugador vic = jd.buscarJugadorXId(24);
+        Sponsor va1 = sd.buscarSponsor(7);
         
         Patrocinio pat = new Patrocinio(va1, vic, true);
         pd.guardarPatrocinio(pat);

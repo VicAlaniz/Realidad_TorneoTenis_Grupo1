@@ -35,7 +35,7 @@ public class PatrocinioData {
     }
     
     public void guardarPatrocinio(Patrocinio p){
-     String query = "INSERT INTO patrocinio (id_sponsor, id_jugador, activo) VALUES (?, ?, ?)";
+     String query = "INSERT INTO patrocinio(id_sponsor, id_jugador, activo) VALUES (?, ?, ?)";
     
         try {
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -110,22 +110,24 @@ public class PatrocinioData {
         Patrocinio p = null;
         ArrayList<Patrocinio> patrociniosXJugador = new ArrayList<>();
 
-        String query = "SELECT * FROM patrocinio WHERE patrocinio.id_jugador = ? AND activo = true";
+        String query = "SELECT * FROM patrocinio WHERE id_jugador = ? AND activo = true";
         try {
             
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,id); 
             ResultSet rs = ps.executeQuery();            
-            //Cursada cursada;
+            
             while(rs.next()){
                 p = new Patrocinio();
+                Sponsor s = new Sponsor();
+                Jugador j = new Jugador();
+                
                 p.setId_patrocinio(rs.getInt(1));
-                
-                Jugador j = buscarJugador(rs.getInt("id_jugador"));
+                j.setId_jugador(rs.getInt("id_jugador"));
                 p.setJugador(j);
-                Sponsor s = buscarSponsor(rs.getInt("id_sponsor"));
+                s.setId_sponsor(rs.getInt("id_sponsor"));
                 p.setSponsor(s);
-                
+                p.setActivo(true);
                 patrociniosXJugador.add(p);
             }      
             ps.close();
