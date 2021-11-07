@@ -16,6 +16,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import torneotenis.Conectar;
 import torneotenis.Encuentros;
+import torneotenis.Estadio;
 import torneotenis.Jugador;
 import torneotenis.Torneo;
 
@@ -38,18 +39,18 @@ public class EncuentrosData {
     }
     
     public void guardarEncuentros(Encuentros enc){
-        String query = "INSERT INTO encuentros (fechaEnc, estadoEnCurso, ganador, id_jugador1, id_jugador2, id_estadio, id_torneo, activo) VALUES (?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO encuentros (fechaEnc, estadoEnCurso, id_jugador1, id_jugador2, id_estadio, id_torneo, activo) VALUES (?,?,?,?,?,?,?)";
         
         try{
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setDate(1, Date.valueOf(enc.getFechaEnc()));
             ps.setInt(2, enc.getEstadoEnCurso());
-            ps.setInt(3, enc.getGanador().getId_jugador());
-            ps.setInt(4, enc.getJugador1().getId_jugador());
-            ps.setInt(5, enc.getJugador2().getId_jugador());
-            ps.setInt(6, enc.getEstadio().getId_estadio());
-            ps.setInt(7, enc.getTorneo().getId_torneo());
-            ps.setBoolean(8, enc.isActivo());
+            //ps.setInt(3, enc.getGanador().getId_jugador());
+            ps.setInt(3, enc.getJugador1().getId_jugador());
+            ps.setInt(4, enc.getJugador2().getId_jugador());
+            ps.setInt(5, enc.getEstadio().getId_estadio());
+            ps.setInt(6, enc.getTorneo().getId_torneo());
+            ps.setBoolean(7, enc.isActivo());
             
             ps.executeUpdate();
             ResultSet rst = ps.getGeneratedKeys();
@@ -65,42 +66,91 @@ public class EncuentrosData {
     }
     
     public Encuentros buscarEncuentro(int id){
-         Encuentros e = new Encuentros();
+         Encuentros enc = new Encuentros();
         
         String query = "SELECT * FROM encuentros WHERE id_encuentro = ?";
         try{
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
+            ResultSet rst = ps.executeQuery();
             
-            while(rs.next()){
-
-                e.setId_encuentro(rs.getInt("id_encuentro"));
-                e.setFechaEnc(rs.getDate("fechaEnc").toLocalDate());
-                e.setEstadoEnCurso(rs.getInt("estadoEnCurso"));
-                e.setGanador(rs.getInt("ganador"));
-                e.setJugador1(rs.getInt());
-                e.setActivo(rs.getBoolean("activo"));
+            while(rst.next()){
+                enc.setId_encuentro(rst.getInt("id_encuentro"));
+                enc.setFechaEnc(rst.getDate("fechaEnc").toLocalDate());
+                enc.setEstadoEnCurso(rst.getInt("estadoEnCurso"));
+                Jugador gan = jd.buscarJugadorXId(rst.getInt("ganador"));
+                enc.setGanador(gan);
+                Jugador j1 = jd.buscarJugadorXId(rst.getInt("id_jugador1"));
+                enc.setJugador1(j1);
+                Jugador j2 = jd.buscarJugadorXId(rst.getInt("id_jugador2"));
+                enc.setJugador2(j2);
+                Estadio es = ed.buscarEstadioXId(rst.getInt("id_estadio"));
+                enc.setEstadio(es);
+                Torneo tor = td.buscarTorneoXId(rst.getInt("id_torneo"));
+                enc.setTorneo(tor);
+                enc.setActivo(true);
             }
             ps.close();
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "ERROR \nSponsor no encontrado");
          }
-        return s; 
+        return enc; 
     }
-    public void ganadorEncuentro(int id_jugador) {
+    public void ganadorEncuentro(Encuentros enc) {
+         String query = "UPDATE encuentros SET ganador = ?  WHERE id_encuentro = ?";
         
+        try{
+            PreparedStatement ps = conn.prepareStatement(query);
+                
+                ps.setInt(1, enc.getGanador().getId_jugador());
+                ps.setInt(2, enc.getId_encuentro());
+                
+                ps.executeUpdate();
+
+            if(ps.executeUpdate()>0){
+                JOptionPane.showMessageDialog(null, "Ganador Actualizado Exitosamente");
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al Intentar Actualizar el Ganador");
+             }
+            ps.close();
+        }catch (SQLException ex){
+                JOptionPane.showMessageDialog(null, "ERROR \nJugador No Encontrado");
+         }
     }
     
     public void actualizarEncuentro(Encuentros enc){
-        
+         String query = "UPDATE encuentros SET fechaEnc = ?, estadoEnCurso = ?, ganador = ?, id_jugador1 = ?, id_jugador2 = ?, id_estadio = ?, id_torneo = ?, activo = ?  WHERE id_encuentro = ?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(query);
+                
+            ps.setDate(1, Date.valueOf(enc.getFechaEnc()));
+            ps.setInt(2, enc.getEstadoEnCurso());
+            ps.setInt(3, enc.getGanador().getId_jugador());
+            ps.setInt(4, enc.getJugador1().getId_jugador());
+            ps.setInt(5, enc.getJugador2().getId_jugador());
+            ps.setInt(6, enc.getEstadio().getId_estadio());
+            ps.setInt(7, enc.getTorneo().getId_torneo());
+            ps.setBoolean(8, enc.isActivo());
+            ps.setInt(9, enc.getId_encuentro());
+                
+                ps.executeUpdate();
+
+            if(ps.executeUpdate()>0){
+                JOptionPane.showMessageDialog(null, "Ganador Actualizado Exitosamente");
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al Intentar Actualizar el Ganador");
+             }
+            ps.close();
+        }catch (SQLException ex){
+                JOptionPane.showMessageDialog(null, "ERROR \nJugador No Encontrado");
+         }
     }
     
-    public List<Encuentros> listaDeEncuentros(int estadoEnCurso){
+    public List<Encuentros> listaDeEncuentros(){
         
-        ArrayList<Encuentros> listaDeEncuentros = new ArrayList<>();
+     ArrayList<Encuentros> listaDeEncuentros = new ArrayList<>();
         
-        String query = "SELECT * FROM encuentros WHERE activo = false";
+        String query = "SELECT * FROM encuentros WHERE activo = true";
          
         try{
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -108,39 +158,57 @@ public class EncuentrosData {
             
             while(rst.next()){
                 
-                Encuentros enc = new Encuentros();
-                
-                enc.setId_encuentro(rst.getInt(1));
-                enc.setFechaEnc(rst.getDate(2).toLocalDate());
-                enc.setEstadoEnCurso(rst.getInt(3));
-                enc.setGanador(rst.getInt(4));
-                //enc.setJugador1(rst.getInt(5));
-                //enc.setJugador2(rst.getInt(6));
-                //enc.setEstadio(rst.getInt(7));
-                //enc.setTorneo(rst.getInt(8));
-                enc.setActivo(rst.getBoolean(9));
+                Encuentros enc = new Encuentros();    
+                enc.setId_encuentro(rst.getInt("id_encuentro"));
+                enc.setFechaEnc(rst.getDate("fechaEnc").toLocalDate());
+                enc.setEstadoEnCurso(rst.getInt("estadoEnCurso"));
+                Jugador gan = jd.buscarJugadorXId(rst.getInt("ganador"));
+                enc.setGanador(gan);
+                Jugador j1 = jd.buscarJugadorXId(rst.getInt("id_jugador1"));
+                enc.setJugador1(j1);
+                Jugador j2 = jd.buscarJugadorXId(rst.getInt("id_jugador2"));
+                enc.setJugador2(j2);
+                Estadio es = ed.buscarEstadioXId(rst.getInt("id_estadio"));
+                enc.setEstadio(es);
+                Torneo tor = td.buscarTorneoXId(rst.getInt("id_torneo"));
+                enc.setTorneo(tor);
+                enc.setActivo(true);
                 
                 listaDeEncuentros.add(enc);
             }
             ps.close();
         }catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, "ERROR \nNo hay Encuentros");   
+            JOptionPane.showMessageDialog(null, "ERROR \nNo hay Encuentros"+ ex.getMessage());   
         }
         return listaDeEncuentros;
     }
 
-    public List<Encuentros> listaEncuentrosXJugador(int id_jugador){
-        
-        return list;
-    }
-    
     public List<Jugador> listaJugadoresXTorneo(int id_torneo){
-        
-    }
-    public List<Torneo> listaTorneosXJugador(int id_jugador){
-        
-    }
-     public void calcularRanking(int ganador){
-        
+    ArrayList<Jugador> listaJugadores = new ArrayList<>();
+         String query = "SELECT jugador.id_jugador, jugador.nombreApellido, jugador.activo "
+                 + "FROM jugador, encuentros, torneos "
+                 + "WHERE encuentros.activo = true "
+                 //+ "AND encuentros.id_torneo = ? "
+                 + "AND torneos.id_torneo = ? "
+                 + "AND torneos.id_torneo = encuentros.id_torneo";
+                 //+ "AND jugador.id_jugador = encuentros.id_jugador1 OR jugador.id_jugador = encuentros.id_jugador2";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, id_torneo);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Jugador j = new Jugador();
+                j.setId_jugador(rs.getInt("id_jugador"));
+                j.setNombreApellido(rs.getString("nombreApellido"));
+                j.setActivo(rs.getBoolean("jugador.activo"));
+                listaJugadores.add(j);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al cargar encuentros" + ex.getMessage());
+        }
+        return listaJugadores;
     }
 }

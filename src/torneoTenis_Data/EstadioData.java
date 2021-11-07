@@ -85,6 +85,35 @@ public class EstadioData {
          }
         return est;
     }
+    public Estadio buscarEstadioXId(int id){
+        
+        Estadio est = null;
+        
+        String query = "SELECT * FROM estadio WHERE id_estadio = ?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                est = new Estadio();
+                est.setId_estadio(rs.getInt("id_estadio"));
+                est.setNombre(rs.getString("nombre"));
+                est.setCiudad(rs.getString("ciudad"));
+                est.setAncho(rs.getFloat("ancho"));
+                est.setLargo(rs.getFloat("largo"));
+                est.setCategoria(rs.getString("categoria"));
+                est.setHabilitado(rs.getBoolean("habilitado"));
+                 est.setDireccion(rs.getString("direccion"));
+                est.setCapacidad(rs.getInt("capacidad"));
+                est.setActivo(rs.getBoolean("activo"));
+            }
+            ps.close();
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "ERROR \nEstadio No Encontrado");
+         }
+        return est;
+    }
     
     public void actualizarEstadio(Estadio est){
         String query = "UPDATE estadio SET nombre = ?, ciudad = ?, ancho = ?, largo = ?, categoria = ?, habilitado = ?, direccion = ?, capacidad = ?, activo = ?  WHERE id_estadio = ?";

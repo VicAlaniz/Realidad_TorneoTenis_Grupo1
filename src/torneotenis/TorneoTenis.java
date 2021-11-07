@@ -35,8 +35,8 @@ public class TorneoTenis {
         TorneoData td = new TorneoData(conexion);
         
         
-        Jugador v = new Jugador(26, "Vicky Alaniz", 34951362, LocalDate.of(1985, 10, 11), 179, 67, "voleadora", "diestra", true);
-        Jugador p = new Jugador(28, "Pato Baigorria", 27632541, LocalDate.of(1985, 10, 11), 179, 67, "jugadora de toda la cancha", "zurda", true);
+        Jugador v = new Jugador(24, "Vicky Alaniz", 34951362, LocalDate.of(1985, 10, 11), 179, 67, "voleadora", "diestra", true);
+        Jugador p = new Jugador(25, "Pato Baigorria", 27632541, LocalDate.of(1985, 10, 11), 179, 67, "jugadora de toda la cancha", "zurda", true);
         
         //jd.registrarJugador(v);
         //jd.registrarJugador(p);
@@ -59,7 +59,7 @@ public class TorneoTenis {
         //GUARDAR ESTADIO
         
         //Estadio co = new Estadio ("Cordoba Open", "Córdoba", 1546, 12698, "Cesped", true, "La Ribera", 15000, true);
-        Estadio co2 = new Estadio ("Cordoba Open", "Córdoba", 1546, 12698, "Cesped", true, "La Ribera", 15000, true);
+        Estadio co2 = new Estadio (5, "Cordoba Open", "Córdoba", 1546, 12698, "Cesped", true, "La Ribera", 15000, true);
         
         //esd.guardarEstadio(co2);
         
@@ -82,7 +82,7 @@ public class TorneoTenis {
         //esd.listaDeEstadios();
         //System.out.println("Lista de Estadios: "+esd.listaDeEstadios());
         
-        Torneo us = new Torneo ("US Open", LocalDate.of(2021, 1, 1), LocalDate.of(2021, 12, 1), true );
+        Torneo us = new Torneo (4, "US Open", LocalDate.of(2021, 1, 1), LocalDate.of(2021, 12, 1), true );
         //GUARDAR TORNEO
         //td.guardarTorneo(us);
         //BUSCAR
@@ -108,14 +108,24 @@ public class TorneoTenis {
         //System.out.println("Sponsor: " + sd.listaDeSponsors());
         //sd.borrarSponsor(7);
         
-        Encuentros enc = new Encuentros(LocalDate.of(2021, 11, 11), 2, v, v, p, co2, us, true);
-        //ed.guardarEncuentros(enc);
-        Jugador vic = jd.buscarJugadorXId(24);
-        Sponsor va1 = sd.buscarSponsor(7);
+        Encuentros enc = new Encuentros(17, LocalDate.of(2021, 11, 11), 2, v, v, p, co2, us, true);
+        //Encuentros encu = new Encuentros(18, LocalDate.of(2021, 11, 26), 2, null, v, p, co2, us, true);
+        //ed.guardarEncuentros(encu);
+        //enc.setGanador(v);
+        //enc.setFechaEnc(LocalDate.of(2021, 11, 1));
+        //ed.ganadorEncuentro(enc);
+        //ed.actualizarEncuentro(enc);
+        //Jugador vic = jd.buscarJugadorXId(24);
+        //Sponsor va1 = sd.buscarSponsorXId(7);
         
-        Patrocinio pat = new Patrocinio(va1, vic, true);
-        pd.guardarPatrocinio(pat);
+        //Patrocinio pat = new Patrocinio(va1, vic, true);
+        //pd.guardarPatrocinio(pat);
+        //pd.borrarPatrocinio(7, 24);
         
+        //System.out.println("Patrocinio: " + pd.obtenerPatrocinioXJugador(24));
+        //System.out.println("Encuentros: " + ed.listaEncuentrosXJugador(25));
+        //System.out.println(ed.buscarEncuentro(18));
+        System.out.println("Jugadores: " + ed.listaJugadoresXTorneo(2));
     }
     
     

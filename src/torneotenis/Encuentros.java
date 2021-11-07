@@ -45,6 +45,29 @@ public class Encuentros {
         this.activo = activo;
     }
 
+    public Encuentros(int id_encuentro, LocalDate fechaEnc, int estadoEnCurso, Jugador jugador1, Jugador jugador2, Estadio estadio, Torneo torneo, boolean activo) {
+        this.id_encuentro = id_encuentro;
+        this.fechaEnc = fechaEnc;
+        this.estadoEnCurso = estadoEnCurso;
+        this.jugador1 = jugador1;
+        this.jugador2 = jugador2;
+        this.estadio = estadio;
+        this.torneo = torneo;
+        this.activo = activo;
+    }
+
+    
+    public Encuentros(LocalDate fechaEnc, int estadoEnCurso, Jugador jugador1, Jugador jugador2, Estadio estadio, Torneo torneo, boolean activo) {
+        this.fechaEnc = fechaEnc;
+        this.estadoEnCurso = estadoEnCurso;
+        this.jugador1 = jugador1;
+        this.jugador2 = jugador2;
+        this.estadio = estadio;
+        this.torneo = torneo;
+        this.activo = activo;
+    }
+
+    
     public Encuentros() {
     }
 

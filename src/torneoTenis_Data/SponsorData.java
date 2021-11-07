@@ -114,7 +114,7 @@ public class SponsorData {
          }
         return s;
     }
-      public Sponsor buscarSponsor(int id){
+    public Sponsor buscarSponsorXId(int id){
                 Sponsor s = new Sponsor();
         
         String query = "SELECT * FROM sponsor WHERE id_sponsor = ?";
