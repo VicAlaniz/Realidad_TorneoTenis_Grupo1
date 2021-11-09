@@ -183,32 +183,40 @@ public class EncuentrosData {
         return listaDeEncuentros;
     }
 
-    public List<Jugador> listaJugadoresXTorneo(int id_torneo){
-    ArrayList<Jugador> listaJugadores = new ArrayList<>();
-         String query = "SELECT jugador.id_jugador, jugador.nombreApellido, jugador.activo "
-                 + "FROM jugador, encuentros, torneos "
-                 + "WHERE encuentros.activo = true "
-                 //+ "AND encuentros.id_torneo = ? "
-                 + "AND torneos.id_torneo = ? "
-                 + "AND torneos.id_torneo = encuentros.id_torneo";
-                 //+ "AND jugador.id_jugador = encuentros.id_jugador1 OR jugador.id_jugador = encuentros.id_jugador2";
-
-        try {
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setInt(1, id_torneo);
+    public List<Encuentros> listaEncuentrosXJugador(int id_jugador){
+        
+        ArrayList<Encuentros> listaDeEncuentrosXJugador = new ArrayList<>();
+        
+        String query = "SELECT encuentros.id_encuentro, encuentros.fechaEnc "
+                + "FROM encuentros, jugador "
+                + "WHERE jugador.id_jugador = ? "
+                + "AND jugador.id_jugador = encuentros.id_jugador1 "
+                + "UNION "
+                + "SELECT encuentros.id_encuentro, encuentros.fechaEnc "
+                + "FROM encuentros, jugador " 
+                + "WHERE jugador.id_jugador = ? " 
+                + "AND jugador.id_jugador = encuentros.id_jugador2";
+        
+            try{
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id_jugador);
+            ps.setInt(2, id_jugador);
             ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Jugador j = new Jugador();
-                j.setId_jugador(rs.getInt("id_jugador"));
-                j.setNombreApellido(rs.getString("nombreApellido"));
-                j.setActivo(rs.getBoolean("jugador.activo"));
-                listaJugadores.add(j);
+                         
+           while(rs.next()){
+                Encuentros e = new Encuentros();
+                e.setId_encuentro(rs.getInt("id_encuentro"));
+                e.setFechaEnc(rs.getDate("fechaEnc").toLocalDate());
+               
+                
+                listaDeEncuentrosXJugador.add(e);
             }
             ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al cargar encuentros" + ex.getMessage());
-        }
-        return listaJugadores;
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "ERROR \nEste jugador no participa en ningun encuentro"+ex.getMessage());
+         }
+        return listaDeEncuentrosXJugador;  
     }
+    
+   
 }

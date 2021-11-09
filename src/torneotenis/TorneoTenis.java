@@ -117,6 +117,7 @@ public class TorneoTenis {
         //ed.actualizarEncuentro(enc);
         //Jugador vic = jd.buscarJugadorXId(24);
         //Sponsor va1 = sd.buscarSponsorXId(7);
+        //System.out.println(ed.listaDeEncuentros());
         
         //Patrocinio pat = new Patrocinio(va1, vic, true);
         //pd.guardarPatrocinio(pat);
@@ -125,7 +126,9 @@ public class TorneoTenis {
         //System.out.println("Patrocinio: " + pd.obtenerPatrocinioXJugador(24));
         //System.out.println("Encuentros: " + ed.listaEncuentrosXJugador(25));
         //System.out.println(ed.buscarEncuentro(18));
-        System.out.println("Jugadores: " + ed.listaJugadoresXTorneo(2));
+        //System.out.println("Jugadores: " + td.listaJugadoresXTorneo(3));
+        //System.out.println("Jugadores: " + td.listaTorneosXJugador(25));
+        System.out.println(ed.listaEncuentrosXJugador(25));
     }
     
     

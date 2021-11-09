@@ -176,88 +176,77 @@ public class TorneoData {
    public List<Jugador> listaJugadoresXTorneo(int id_torneo){
        ArrayList<Jugador> listaDeJugadores = new ArrayList<>();
         
-        String query = "SELECT * FROM torneos, encuentros WHERE activo = true AND id_torneo = ?";
+        String query = "SELECT jugador.id_jugador, jugador.nombreApellido, jugador.activo "
+                + "FROM torneos, encuentros, jugador "
+                + "WHERE torneos.id_torneo = ? "
+                + "AND torneos.id_torneo = encuentros.id_torneo "
+                + "AND jugador.id_jugador = encuentros.id_jugador1 " 
+                + "UNION "
+                + "SELECT jugador.id_jugador, jugador.nombreApellido, jugador.activo "
+                + "FROM torneos, encuentros, jugador " 
+                + "WHERE torneos.id_torneo = ? "
+                + "AND torneos.id_torneo = encuentros.id_torneo " 
+                + "AND jugador.id_jugador = encuentros.id_jugador2 ";
         
         try{
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id_torneo);
+            ps.setInt(2, id_torneo);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
                 Jugador j = new Jugador();
-                j.getNombreApellido();
+                j.setId_jugador(rs.getInt("id_jugador"));
+                j.setNombreApellido(rs.getString("nombreApellido"));
                 j.setActivo(rs.getBoolean("activo"));
                 
                 listaDeJugadores.add(j);
             }
             ps.close();
         }catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, "ERROR \nTorneos No Encontrados");
+            JOptionPane.showMessageDialog(null, "ERROR \nTorneos sin jugadores");
          }
         return listaDeJugadores;  
     }
    public List<Torneo> listaTorneosXJugador(int id_jugador){
+        ArrayList<Torneo> listaDeTorneosXJugador = new ArrayList<>();
         
-    }
-   public void calcularRanking(int id_jugador){
-        
-    }
-   /*public List<Encuentros> listaEncuentrosXJugador(int id_jugador){
-        
-        ArrayList<Encuentros> listaDeEncuentros = new ArrayList<>();
-        
-        String query = "SELECT * FROM encuentros WHERE activo = true AND id_jugador1 = ? AND id_jugador2 = ?";
+        String query = "SELECT torneos.id_torneo, torneos.nombre, torneos.activo "
+                + "FROM torneos, encuentros, jugador "
+                + "WHERE jugador.id_jugador = ? "
+                + "AND torneos.id_torneo = encuentros.id_torneo "
+                + "AND jugador.id_jugador = encuentros.id_jugador1 "
+                + "UNION "
+                + "SELECT torneos.id_torneo, torneos.nombre, torneos.activo " 
+                + "FROM torneos, encuentros, jugador " 
+                + "WHERE jugador.id_jugador = ? " 
+                + "AND torneos.id_torneo = encuentros.id_torneo " 
+                + "AND jugador.id_jugador = encuentros.id_jugador2 ";
         
         try{
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id_jugador);
             ps.setInt(2, id_jugador);
-            ResultSet rst = ps.executeQuery();
-            if (jd.buscarJugadorXId(id_jugador) == jd.buscarJugadorXId(rst.getInt("id_jugador1"))) {
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Torneo t = new Torneo();
+                t.setId_torneo(rs.getInt("id_torneo"));
+                t.setNombre(rs.getString("nombre"));
+                t.setActivo(rs.getBoolean("activo"));
                 
-            while(rst.next()){
-                
-                Encuentros enc = new Encuentros();    
-                enc.setId_encuentro(rst.getInt("id_encuentro"));
-                enc.setFechaEnc(rst.getDate("fechaEnc").toLocalDate());
-                enc.setEstadoEnCurso(rst.getInt("estadoEnCurso"));
-                enc.setGanador(jd.buscarJugadorXId(rst.getInt("ganador")));
-                Jugador j1 = jd.buscarJugadorXId(rst.getInt("id_jugador1"));
-                enc.setJugador1(j1);
-                Jugador j2 = jd.buscarJugadorXId(rst.getInt("id_jugador2"));
-                enc.setJugador2(j2);
-                enc.setEstadio(ed.buscarEstadioXId(rst.getInt("id_estadio")));
-                enc.setTorneo(td.buscarTorneoXId(rst.getInt("id_torneo")));
-                enc.setActivo(true);
-                
-                listaDeEncuentros.add(enc);
-            }}
-            if (jd.buscarJugadorXId(id_jugador) == jd.buscarJugadorXId(rst.getInt("id_jugador2"))) {
-                
-            while(rst.next()){
-                
-                Encuentros enc = new Encuentros();    
-                enc.setId_encuentro(rst.getInt("id_encuentro"));
-                enc.setFechaEnc(rst.getDate("fechaEnc").toLocalDate());
-                enc.setEstadoEnCurso(rst.getInt("estadoEnCurso"));
-                enc.setGanador(jd.buscarJugadorXId(rst.getInt("ganador")));
-                Jugador j1 = jd.buscarJugadorXId(rst.getInt("id_jugador1"));
-                enc.setJugador1(j1);
-                Jugador j2 = jd.buscarJugadorXId(rst.getInt("id_jugador2"));
-                enc.setJugador2(j2);
-                enc.setEstadio(ed.buscarEstadioXId(rst.getInt("id_estadio")));
-                enc.setTorneo(td.buscarTorneoXId(rst.getInt("id_torneo")));
-                enc.setActivo(true);
-                
-                listaDeEncuentros.add(enc);
-            }}
+                listaDeTorneosXJugador.add(t);
+            }
             ps.close();
         }catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, "ERROR \nNo hay Encuentros"+ex.getMessage());   
-        }
-        return listaDeEncuentros;
+            JOptionPane.showMessageDialog(null, "ERROR \nEste jugador no participa en ningun torneo"+ex.getMessage());
+         }
+        return listaDeTorneosXJugador;  
     }
-    */
+   public void calcularRanking(int id_jugador){
+        
+    }
+   
   
    
 }
