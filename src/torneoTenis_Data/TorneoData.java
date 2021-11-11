@@ -264,7 +264,7 @@ public class TorneoData {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
-                System.out.println("PAsando");
+               
                 Resultado r = new Resultado();
                 Jugador j = jd.buscarJugadorXId(rs.getInt("ganador"));
                 r.setJugador(j);
