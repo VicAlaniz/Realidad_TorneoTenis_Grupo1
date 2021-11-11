@@ -28,9 +28,6 @@ public class JugadorData {
         this.conn = (Connection) conexionJugador.getConexion();
     }
 
-    JugadorData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     public void registrarJugador(Jugador jugador){
         String query = "INSERT INTO jugador(nombreApellido, dni, fechaNac, altura, peso, estilo, manoHabil, activo)VALUES (?,?,?,?,?,?,?,?)";

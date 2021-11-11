@@ -128,7 +128,12 @@ public class TorneoTenis {
         //System.out.println(ed.buscarEncuentro(18));
         //System.out.println("Jugadores: " + td.listaJugadoresXTorneo(3));
         //System.out.println("Jugadores: " + td.listaTorneosXJugador(25));
-        System.out.println(ed.listaEncuentrosXJugador(25));
+        //System.out.println(ed.listaEncuentrosXJugador(25));
+        for(Resultado r : td.calcularRanking(4)) {
+            System.out.println(r.getJugador().getNombreApellido());
+            System.out.println(r.getTorneo().getNombre());
+            System.out.println(r.getTotal());
+        }
     }
     
     

@@ -16,6 +16,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import torneotenis.Conectar;
 import torneotenis.Jugador;
+import torneotenis.Resultado;
 import torneotenis.Torneo;
 
 /**
@@ -24,9 +25,11 @@ import torneotenis.Torneo;
  */
 public class TorneoData {
     private Connection conn = null;
+    private JugadorData jd;
     
     public TorneoData(Conectar conexionTorneo){
         this.conn = (Connection) conexionTorneo.getConexion();
+        jd = new JugadorData(conexionTorneo);
     }
     
    public void guardarTorneo(Torneo t) {
@@ -243,8 +246,39 @@ public class TorneoData {
          }
         return listaDeTorneosXJugador;  
     }
-   public void calcularRanking(int id_jugador){
+   public List<Resultado> calcularRanking(int id_torneo){
+        ArrayList<Resultado> listaDeGanadores = new ArrayList<>();
         
+        String query = "SELECT r.ganador, r.id_torneo, (SUM(r.cant_puntos) + SUM(r.cant_pat)) AS total "
+                + "FROM (SELECT  ganador, id_torneo, 3 AS cant_puntos, 1 AS cant_pat "
+                + "FROM encuentros, patrocinio "
+                + "WHERE patrocinio.id_jugador = encuentros.ganador "
+                + "AND id_torneo = ? "
+                + "AND patrocinio.activo = 1 "
+                + "AND ganador <> 'null') AS r "
+                + "GROUP BY r.ganador, r.id_torneo ";
+        
+        try{
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, id_torneo);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                System.out.println("PAsando");
+                Resultado r = new Resultado();
+                Jugador j = jd.buscarJugadorXId(rs.getInt("ganador"));
+                r.setJugador(j);
+                Torneo t = buscarTorneoXId(rs.getInt("id_torneo"));
+                r.setTorneo(t);
+                r.setTotal(rs.getInt("total"));
+                
+                listaDeGanadores.add(r);
+            }
+            ps.close();
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "ERROR \nNo se puede realizar lista"+ex.getMessage());
+         }
+        return listaDeGanadores; 
     }
    
   
