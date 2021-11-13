@@ -46,7 +46,7 @@ public class TorneoTenis {
         
         //p.setActivo(true);
         //v.setPeso((float) 63.7);
-        //v.setAltura((float) 1.65);
+        //v.setAltura((float) 1.75);
         //jd.actualizarJugador(v);
        
         //jd.listaDeJugadores();

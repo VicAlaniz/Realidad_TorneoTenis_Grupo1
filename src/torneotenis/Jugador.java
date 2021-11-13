@@ -22,8 +22,8 @@ public class Jugador {
     private String manoHabil;
     private boolean activo;
 
-    public Jugador(String nombre, int dni, LocalDate fechaNac, float altura, float peso, String estilo, String manoHabil, boolean activo) {
-        this.nombreApellido = nombre;
+    public Jugador(String nombreApellido, int dni, LocalDate fechaNac, float altura, float peso, String estilo, String manoHabil, boolean activo) {
+        this.nombreApellido = nombreApellido;
         this.dni = dni;
         this.fechaNac = fechaNac;
         this.altura = altura;
@@ -33,9 +33,9 @@ public class Jugador {
         this.activo = activo;
     }
 
-    public Jugador(int id_jugador, String nombre, int dni, LocalDate fechaNac, float altura, float peso, String estilo, String manoHabil, boolean activo) {
+    public Jugador(int id_jugador, String nombreApellido, int dni, LocalDate fechaNac, float altura, float peso, String estilo, String manoHabil, boolean activo) {
         this.id_jugador = id_jugador;
-        this.nombreApellido = nombre;
+        this.nombreApellido = nombreApellido;
         this.dni = dni;
         this.fechaNac = fechaNac;
         this.altura = altura;
@@ -60,8 +60,8 @@ public class Jugador {
         return nombreApellido;
     }
 
-    public void setNombreApellido(String nombre) {
-        this.nombreApellido = nombre;
+    public void setNombreApellido(String nombreApellido) {
+        this.nombreApellido = nombreApellido;
     }
 
     public int getDni() {

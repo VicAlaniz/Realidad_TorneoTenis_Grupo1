@@ -5,17 +5,29 @@
  */
 package torneoTenis_Vistas;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+import torneoTenis_Data.JugadorData;
+import torneotenis.Conectar;
+import torneotenis.Jugador;
+
 /**
  *
  * @author Administrador
  */
 public class VistaJugador extends javax.swing.JInternalFrame {
-
+       private JugadorData jugadorData;
+       private Conectar conn;
     /**
      * Creates new form VistaJugador
      */
     public VistaJugador() {
         initComponents();
+        conn = new Conectar();
+        jugadorData = new JugadorData(conn);
     }
 
     /**
@@ -27,21 +39,327 @@ public class VistaJugador extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jlTitulo = new javax.swing.JLabel();
+        jlId = new javax.swing.JLabel();
+        jlNom = new javax.swing.JLabel();
+        jlDni = new javax.swing.JLabel();
+        jlFechaNac = new javax.swing.JLabel();
+        jlAltura = new javax.swing.JLabel();
+        jlPeso = new javax.swing.JLabel();
+        jlEstilo = new javax.swing.JLabel();
+        jlMano = new javax.swing.JLabel();
+        jlActivo = new javax.swing.JLabel();
+        jbGuardar = new javax.swing.JButton();
+        jbActualizar = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
+        jbBuscar = new javax.swing.JButton();
+        jtId = new javax.swing.JTextField();
+        jtNom = new javax.swing.JTextField();
+        jtDni = new javax.swing.JTextField();
+        jtAltura = new javax.swing.JTextField();
+        jtPeso = new javax.swing.JTextField();
+        jcbEstilo = new javax.swing.JComboBox<>();
+        jcbMano = new javax.swing.JComboBox<>();
+        jcbActivo = new javax.swing.JCheckBox();
+        jdFechaNac = new com.toedter.calendar.JDateChooser();
+        jbLimpiar = new javax.swing.JButton();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
+        jlTitulo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jlTitulo.setText("JUGADOR");
+
+        jlId.setText("ID Jugador");
+
+        jlNom.setText("Nombre y Apellido");
+
+        jlDni.setText("DNI");
+
+        jlFechaNac.setText("Fecha de Nacimiento");
+
+        jlAltura.setText("Altura");
+
+        jlPeso.setText("Peso");
+
+        jlEstilo.setText("Estilo");
+
+        jlMano.setText("Mano Habil");
+
+        jlActivo.setText("Activo");
+
+        jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
+
+        jbActualizar.setText("Actualizar");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
+
+        jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
+
+        jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
+
+        jtNom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtNomActionPerformed(evt);
+            }
+        });
+
+        jcbEstilo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agresivo", "Voleadores", "Jugador de toda la cancha" }));
+
+        jcbMano.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Zurdo", "Diestro" }));
+
+        jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jlDni)
+                                .addGap(22, 22, 22)
+                                .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(100, 100, 100)
+                                .addComponent(jbBuscar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jlId)
+                                        .addGap(39, 39, 39)
+                                        .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jlMano)
+                                        .addGap(35, 35, 35)
+                                        .addComponent(jcbMano, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jlNom)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jtNom, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jlEstilo)
+                                            .addComponent(jlActivo))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jcbActivo)
+                                            .addComponent(jcbEstilo, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(68, 68, 68))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jbGuardar)
+                                            .addGap(33, 33, 33)
+                                            .addComponent(jbActualizar)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jbEliminar))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jlAltura)
+                                                    .addGap(29, 29, 29)
+                                                    .addComponent(jtAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jlFechaNac))
+                                            .addGap(34, 34, 34)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jlPeso)
+                                                    .addGap(27, 27, 27)
+                                                    .addComponent(jtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(jbLimpiar))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(jlTitulo)))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlTitulo)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlId)
+                    .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlNom)
+                    .addComponent(jtNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlDni)
+                    .addComponent(jbBuscar)
+                    .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlFechaNac)
+                    .addComponent(jdFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlAltura)
+                    .addComponent(jlPeso)
+                    .addComponent(jtAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlEstilo)
+                    .addComponent(jcbEstilo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlMano)
+                    .addComponent(jcbMano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlActivo)
+                    .addComponent(jcbActivo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbGuardar)
+                    .addComponent(jbActualizar)
+                    .addComponent(jbEliminar)
+                    .addComponent(jbLimpiar))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        // TODO add your handling code here:
+        int dni = Integer.parseInt(jtDni.getText());
+        Jugador jugador = jugadorData.buscarJugador(dni);
+        
+        if(jugador != null){
+            jtId.setText(jugador.getId_jugador()+"");
+            jtNom.setText(jugador.getNombreApellido()+"");
+            jdFechaNac.setDate(Date.valueOf(jugador.getFechaNac()));
+            jtDni.setText(jugador.getDni()+"");
+            jtAltura.setText(jugador.getAltura()+"");
+            jtPeso.setText(jugador.getPeso()+"");
+            jcbEstilo.setSelectedItem(jugador.getEstilo()+"");
+            jcbMano.setSelectedItem(jugador.getManoHabil()+"");
+            jcbActivo.setSelected(jugador.isActivo());
+        }else{
+            JOptionPane.showMessageDialog(this,"No se encontraron datos");
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jtNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtNomActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+        String nombreApellido=jtNom.getText();
+        int dni=Integer.parseInt(jtDni.getText());
+        
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha = formato.format(jdFechaNac.getDate());
+        LocalDate fechaNac=LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        
+        float altura=Float.parseFloat(jtAltura.getText());
+        float peso=Float.parseFloat(jtPeso.getText());
+        String estilo=(String) jcbEstilo.getSelectedItem();
+        String manoHabil=(String) jcbMano.getSelectedItem();
+        boolean activo=jcbActivo.isEnabled();
+        
+        Jugador jugador = new Jugador(nombreApellido, dni, fechaNac, altura, peso, estilo, manoHabil, activo);
+        
+        jugadorData.registrarJugador(jugador);
+        jtId.setText(jugador.getId_jugador() + "");
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        // TODO add your handling code here:
+        int dni = Integer.parseInt(jtDni.getText());
+        jugadorData.eliminarJugador(dni);
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+        // TODO add your handling code here:
+             if(jtId.getText()!=null){
+            int id_jugador=Integer.parseInt(jtId.getText());
+            String nombreApellido=jtNom.getText();
+            int dni=Integer.parseInt(jtDni.getText());
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            String fecha = formato.format(jdFechaNac.getDate());
+            LocalDate fechaNac=LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            float altura=Float.parseFloat(jtAltura.getText());
+            float peso=Float.parseFloat(jtPeso.getText());
+            String estilo=String.valueOf(jcbEstilo.getSelectedItem());
+            String manoHabil=String.valueOf(jcbMano.getSelectedItem());
+            boolean activo=jcbActivo.isEnabled();
+        
+            Jugador jugador = new Jugador(id_jugador, nombreApellido, dni, fechaNac, altura, peso, estilo, manoHabil, activo);
+            jugadorData.actualizarJugador(jugador);
+        }else{
+            JOptionPane.showMessageDialog(this,"No se encontraron datos");
+        }
+    }//GEN-LAST:event_jbActualizarActionPerformed
+
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        // TODO add your handling code here:
+        jtId.setText("");
+        jtNom.setText("");
+        jtDni.setText("");
+        jdFechaNac.setDateFormatString("");
+        jtAltura.setText("");
+        jtPeso.setText("");
+        jcbActivo.setEnabled(false);
+    }//GEN-LAST:event_jbLimpiarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jbActualizar;
+    private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbLimpiar;
+    private javax.swing.JCheckBox jcbActivo;
+    private javax.swing.JComboBox<String> jcbEstilo;
+    private javax.swing.JComboBox<String> jcbMano;
+    private com.toedter.calendar.JDateChooser jdFechaNac;
+    private javax.swing.JLabel jlActivo;
+    private javax.swing.JLabel jlAltura;
+    private javax.swing.JLabel jlDni;
+    private javax.swing.JLabel jlEstilo;
+    private javax.swing.JLabel jlFechaNac;
+    private javax.swing.JLabel jlId;
+    private javax.swing.JLabel jlMano;
+    private javax.swing.JLabel jlNom;
+    private javax.swing.JLabel jlPeso;
+    private javax.swing.JLabel jlTitulo;
+    private javax.swing.JTextField jtAltura;
+    private javax.swing.JTextField jtDni;
+    private javax.swing.JTextField jtId;
+    private javax.swing.JTextField jtNom;
+    private javax.swing.JTextField jtPeso;
     // End of variables declaration//GEN-END:variables
 }
