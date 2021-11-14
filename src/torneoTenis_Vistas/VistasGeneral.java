@@ -96,6 +96,13 @@ public class VistasGeneral extends javax.swing.JFrame {
 
     private void jmEstadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEstadioActionPerformed
         // TODO add your handling code here:
+          esc.removeAll();
+          esc.repaint();
+          VistaEstadio ve = new VistaEstadio();
+          ve.setVisible(true);
+          esc.add(ve);
+          esc.moveToFront(ve);
+        
     }//GEN-LAST:event_jmEstadioActionPerformed
 
     private void jmJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmJugadorActionPerformed
