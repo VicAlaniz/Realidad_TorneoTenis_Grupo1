@@ -58,6 +58,10 @@ public class VistaTorneo extends javax.swing.JInternalFrame {
         JbEliminar = new javax.swing.JButton();
         jbLimpiar = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("TORNEO");
 

@@ -28,6 +28,12 @@ public class Patrocinio {
         this.activo = activo;
     }
 
+    public Patrocinio(int id_patrocinio, Sponsor sponsor, Jugador jugador) {
+        this.id_patrocinio = id_patrocinio;
+        this.sponsor = sponsor;
+        this.jugador = jugador;
+    }
+
     public Patrocinio() {
     }
 
