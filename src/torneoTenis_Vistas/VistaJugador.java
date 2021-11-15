@@ -329,10 +329,12 @@ public class VistaJugador extends javax.swing.JInternalFrame {
         jtId.setText("");
         jtNom.setText("");
         jtDni.setText("");
-        jdFechaNac.setDateFormatString("");
+        jdFechaNac.setDate(null);
         jtAltura.setText("");
         jtPeso.setText("");
-        jcbActivo.setEnabled(false);
+        jcbActivo.setSelected(false);
+        jcbEstilo.setSelectedIndex(-1);
+        jcbMano.setSelectedIndex(-1);
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
 

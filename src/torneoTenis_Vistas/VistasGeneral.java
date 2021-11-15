@@ -16,6 +16,7 @@ public class VistasGeneral extends javax.swing.JFrame {
      */
     public VistasGeneral() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -42,11 +43,11 @@ public class VistasGeneral extends javax.swing.JFrame {
         esc.setLayout(escLayout);
         escLayout.setHorizontalGroup(
             escLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 695, Short.MAX_VALUE)
         );
         escLayout.setVerticalGroup(
             escLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 533, Short.MAX_VALUE)
         );
 
         jmCarga.setText("Carga de Datos");
