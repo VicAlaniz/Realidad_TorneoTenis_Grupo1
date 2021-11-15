@@ -51,6 +51,11 @@ public class VistasGeneral extends javax.swing.JFrame {
         );
 
         jmCarga.setText("Carga de Datos");
+        jmCarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmCargaActionPerformed(evt);
+            }
+        });
 
         jmJugador.setText("Jugador");
         jmJugador.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +102,13 @@ public class VistasGeneral extends javax.swing.JFrame {
 
     private void jmEstadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEstadioActionPerformed
         // TODO add your handling code here:
+          esc.removeAll();
+          esc.repaint();
+          VistaEstadio ve = new VistaEstadio();
+          ve.setVisible(true);
+          esc.add(ve);
+          esc.moveToFront(ve);
+        
     }//GEN-LAST:event_jmEstadioActionPerformed
 
     private void jmJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmJugadorActionPerformed
@@ -109,6 +121,10 @@ public class VistasGeneral extends javax.swing.JFrame {
           esc.moveToFront(vj);
     }//GEN-LAST:event_jmJugadorActionPerformed
 
+    private void jmCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCargaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmCargaActionPerformed
+                      
     /**
      * @param args the command line arguments
      */
