@@ -32,11 +32,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Torneo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmTorneoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmSponsor">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sponsor"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmSponsorActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

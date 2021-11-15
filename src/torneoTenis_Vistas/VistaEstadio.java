@@ -5,14 +5,10 @@
  */
 package torneoTenis_Vistas;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import torneoTenis_Data.EstadioData;
 import torneotenis.Conectar;
 import torneotenis.Estadio;
-import torneotenis.Jugador;
 
 /**
  *
@@ -266,11 +262,9 @@ public class VistaEstadio extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
-         int id_estadio = Integer.parseInt(jtId.getText());
-        Estadio estadio = estadioData.buscarEstadioXId(id_estadio);
-        
+
         String nombre = jtNombre.getText();
-        Estadio est = estadioData.buscarEstadio(nombre);
+        Estadio estadio = estadioData.buscarEstadio(nombre);
         
         if(estadio != null){
             jtId.setText(estadio.getId_estadio()+"");
@@ -341,10 +335,11 @@ public class VistaEstadio extends javax.swing.JInternalFrame {
         jtCiudad.setText("");
         jtAncho.setText("");
         jtLargo.setText("");
-        jchbHabilitado.setEnabled(false);
+        jchbHabilitado.setSelected(false);
         jtDireccion.setText("");
         jtCapacidad.setText("");
-        jchbActivo.setEnabled(false);
+        jchbActivo.setSelected(false);
+        jcbCategoria.setSelectedIndex(-1);
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
 

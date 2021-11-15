@@ -74,9 +74,19 @@ public class VistasGeneral extends javax.swing.JFrame {
         jmCarga.add(jmEstadio);
 
         jmTorneo.setText("Torneo");
+        jmTorneo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmTorneoActionPerformed(evt);
+            }
+        });
         jmCarga.add(jmTorneo);
 
         jmSponsor.setText("Sponsor");
+        jmSponsor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmSponsorActionPerformed(evt);
+            }
+        });
         jmCarga.add(jmSponsor);
 
         jMenu.add(jmCarga);
@@ -124,6 +134,26 @@ public class VistasGeneral extends javax.swing.JFrame {
     private void jmCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCargaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jmCargaActionPerformed
+
+    private void jmTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmTorneoActionPerformed
+        // TODO add your handling code here:
+         esc.removeAll();
+         esc.repaint();
+         VistaTorneo vt = new VistaTorneo();
+          vt.setVisible(true);
+          esc.add(vt);
+          esc.moveToFront(vt);
+    }//GEN-LAST:event_jmTorneoActionPerformed
+
+    private void jmSponsorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSponsorActionPerformed
+        // TODO add your handling code here:
+         esc.removeAll();
+         esc.repaint();
+         VistaSponsorPatrocinio vs = new VistaSponsorPatrocinio();
+         vs.setVisible(true);
+         esc.add(vs);
+         esc.moveToFront(vs);
+    }//GEN-LAST:event_jmSponsorActionPerformed
                       
     /**
      * @param args the command line arguments

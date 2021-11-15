@@ -11,8 +11,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import torneoTenis_Data.TorneoData;
-import torneotenis.Torneo;
 import torneotenis.Conectar;
+import torneotenis.Torneo;
 
 
 /**
@@ -216,8 +216,8 @@ public class VistaTorneo extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
-        int id_torneo = Integer.parseInt(jtId.getText());
-        Torneo torneo = torneoData.buscarTorneoXId(id_torneo);
+        String nombreTorneo = jtNombre.getText();
+        Torneo torneo = torneoData.buscarTorneo(nombreTorneo);
         
              
         if(torneo != null){
@@ -256,9 +256,9 @@ public class VistaTorneo extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         jtId.setText("");
         jtNombre.setText("");
-        jdcFechaIni.setDateFormatString("");
-        jdcFechaFin.setDateFormatString("");
-        jchbActivo.setEnabled(false);
+        jdcFechaIni.setDate(null);
+        jdcFechaFin.setDate(null);
+        jchbActivo.setSelected(false);
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
 
