@@ -37,6 +37,7 @@ public class VistaRanking extends javax.swing.JInternalFrame {
         
         armarCabeceraTabla();
         cargarTorneos();
+        cargarDatos();
     }
     
      public void armarCabeceraTabla() {
@@ -69,18 +70,13 @@ public class VistaRanking extends javax.swing.JInternalFrame {
  
         Torneo t = (Torneo) jcbTorneos.getSelectedItem();
         
-        List<Jugador> lista = torneoData.listaJugadoresXTorneo(t.getId_torneo());
+     
         List<Resultado> res = torneoData.calcularRanking(t.getId_torneo());
-        
-        for (Jugador j: lista) {
-            modelo.addRow(new Object[] {j.getId_jugador(), j.getNombreApellido()});
-        }
         for (Resultado j: res){
-            //if (j.getTorneo().getId_torneo()==t.getId_torneo()){
-            modelo.addRow(new Object[] {j.getTotal()});
-        }
+            if (j.getTorneo().getId_torneo()==t.getId_torneo()){
+            modelo.addRow(new Object[] {j.getJugador().getId_jugador(), j.getJugador().getNombreApellido(), j.getTotal()});
+        }}
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -94,6 +90,10 @@ public class VistaRanking extends javax.swing.JInternalFrame {
         jtRanking = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jcbTorneos = new javax.swing.JComboBox<>();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
 
         jtRanking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,6 +109,12 @@ public class VistaRanking extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jtRanking);
 
         jLabel1.setText("Id Torneo");
+
+        jcbTorneos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbTorneosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,6 +149,11 @@ public class VistaRanking extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jcbTorneosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTorneosActionPerformed
+        // TODO add your handling code here:
+        cargarTorneos();
+    }//GEN-LAST:event_jcbTorneosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
