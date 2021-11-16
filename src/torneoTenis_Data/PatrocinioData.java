@@ -78,6 +78,7 @@ public class PatrocinioData {
             JOptionPane.showMessageDialog(null, "Error");
         }     
     }
+ 
     public List<Patrocinio> listaDePatrocinios() {
         Patrocinio p = null;
       ArrayList<Patrocinio> listaPatrocinio = new ArrayList<>();

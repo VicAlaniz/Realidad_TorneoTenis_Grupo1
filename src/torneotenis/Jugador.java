@@ -122,7 +122,7 @@ public class Jugador {
 
     @Override
     public String toString() {
-        return "Jugador: " + nombreApellido;
+        return "id " + id_jugador + ": " + nombreApellido;
     }
     
     

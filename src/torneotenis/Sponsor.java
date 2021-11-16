@@ -67,7 +67,7 @@ public class Sponsor {
 
     @Override
     public String toString() {
-        return "Sponsor: " + marca;
+        return marca + ", " + indumentaria;
     }
     
     

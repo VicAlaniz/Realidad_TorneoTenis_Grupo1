@@ -35,6 +35,7 @@ public class VistasGeneral extends javax.swing.JFrame {
         jmEstadio = new javax.swing.JMenuItem();
         jmTorneo = new javax.swing.JMenuItem();
         jmSponsor = new javax.swing.JMenuItem();
+        jmRanking = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,6 +89,14 @@ public class VistasGeneral extends javax.swing.JFrame {
             }
         });
         jmCarga.add(jmSponsor);
+
+        jmRanking.setText("Ranking");
+        jmRanking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmRankingActionPerformed(evt);
+            }
+        });
+        jmCarga.add(jmRanking);
 
         jMenu.add(jmCarga);
 
@@ -154,6 +163,16 @@ public class VistasGeneral extends javax.swing.JFrame {
          esc.add(vs);
          esc.moveToFront(vs);
     }//GEN-LAST:event_jmSponsorActionPerformed
+
+    private void jmRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmRankingActionPerformed
+        // TODO add your handling code here:
+        esc.removeAll();
+        esc.repaint();
+        VistaRanking vs = new VistaRanking();
+        vs.setVisible(true);
+        esc.add(vs);
+        esc.moveToFront(vs);
+    }//GEN-LAST:event_jmRankingActionPerformed
                       
     /**
      * @param args the command line arguments
@@ -197,6 +216,7 @@ public class VistasGeneral extends javax.swing.JFrame {
     private javax.swing.JMenu jmCarga;
     private javax.swing.JMenuItem jmEstadio;
     private javax.swing.JMenuItem jmJugador;
+    private javax.swing.JMenuItem jmRanking;
     private javax.swing.JMenuItem jmSponsor;
     private javax.swing.JMenuItem jmTorneo;
     // End of variables declaration//GEN-END:variables
