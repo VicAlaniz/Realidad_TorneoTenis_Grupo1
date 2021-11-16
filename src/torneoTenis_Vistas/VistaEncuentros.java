@@ -31,6 +31,7 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
     private JugadorData jugadorData;
     private EstadioData estadioData;
     private EncuentrosData encuentrosData;
+    //private Encuentros enc;
 
     /**
      * Creates new form VistaRanking
@@ -46,6 +47,7 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         cargarDatosJugadores();
         cargarDatosTorneos();
         cargarDatosEstadios();
+     
     }
     
     public void cargarDatosJugadores() {
@@ -55,6 +57,13 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
             jcbJug2.addItem(j);
         }
     }
+    public void cargarDatosGanador(){
+        int id = Integer.parseInt(jtId.getText());
+        Encuentros enc = encuentrosData.buscarEncuentro(id);
+        List <Jugador> jugadores = encuentrosData.listaPosibleGanador(id);
+        for(Jugador j: jugadores){
+        jcbGanador.addItem(j);
+    }}
      public void cargarDatosTorneos() {
         List <Torneo> torneos = torneoData.listaDeTorneos();
         for(Torneo t: torneos){
@@ -67,8 +76,6 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
             jcbEst.addItem(e);     
         }
     }
-        
-            
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -101,9 +108,9 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         jcbEst = new javax.swing.JComboBox<>();
         jcbTorneo = new javax.swing.JComboBox<>();
         jtId = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
         jcEstado = new javax.swing.JTextField();
         jbBuscar = new javax.swing.JButton();
+        jcbGanador = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -164,9 +171,27 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
             }
         });
 
+        jcbJug2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbJug2ActionPerformed(evt);
+            }
+        });
+
         jcbJug1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbJug1ActionPerformed(evt);
+            }
+        });
+
+        jcbEst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEstActionPerformed(evt);
+            }
+        });
+
+        jcbTorneo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbTorneoActionPerformed(evt);
             }
         });
 
@@ -174,6 +199,12 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
+            }
+        });
+
+        jcbGanador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbGanadorActionPerformed(evt);
             }
         });
 
@@ -230,22 +261,22 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
                                 .addComponent(jcbTorneo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(185, 185, 185))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jcbJug1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel7)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jcbJug2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jcbEst, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(240, 240, 240))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                                .addComponent(jcbEst, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(240, 240, 240))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jcbJug1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jcbGanador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jcbJug2, 0, 138, Short.MAX_VALUE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -261,18 +292,20 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
                         .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jbBuscar))
                     .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jcEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jcbGanador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jchbActivo, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jchbActivo))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(jLabel6)
@@ -286,7 +319,7 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
                             .addComponent(jcbEst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
                         .addComponent(jLabel10)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar)
                     .addComponent(jbActualizar)
@@ -300,6 +333,7 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
 
     private void jcbJug1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbJug1ActionPerformed
         // TODO add your handling code here:
+       
     }//GEN-LAST:event_jcbJug1ActionPerformed
 
     private void jchbActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jchbActivoActionPerformed
@@ -329,6 +363,7 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
         if(jtId.getText()!=null){
+        int id_encuentro = Integer.parseInt(jtId.getText());
         int estadoEnCurso=Integer.parseInt(jcEstado.getText());
         
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -337,11 +372,12 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         
         Jugador jugador1 = (Jugador) jcbJug1.getSelectedItem();
         Jugador jugador2 = (Jugador) jcbJug2.getSelectedItem();
+        Jugador ganador = (Jugador) jcbGanador.getSelectedItem();
         Estadio estadio = (Estadio) jcbEst.getSelectedItem();
         Torneo torneo = (Torneo) jcbTorneo.getSelectedItem();
         boolean activo=jchbActivo.isEnabled();
         
-        Encuentros enc = new Encuentros(fechaEnc, estadoEnCurso, jugador1, jugador2, estadio, torneo, activo);
+        Encuentros enc = new Encuentros(id_encuentro, fechaEnc, estadoEnCurso, ganador, jugador1, jugador2, estadio, torneo, activo);
         encuentrosData.actualizarEncuentro(enc);
         }
         else {
@@ -361,6 +397,7 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         jcEstado.setText("");
         jdcFecha.setDate(null);
         jchbActivo.setSelected(false);
+        jcbGanador.setSelectedIndex(-1);
         jcbJug1.setSelectedIndex(-1);
         jcbJug2.setSelectedIndex(-1);
         jcbEst.setSelectedIndex(-1);
@@ -377,17 +414,38 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
             jtId.setText(enc.getId_encuentro()+"");
             jcEstado.setText(enc.getEstadoEnCurso()+"");
             jdcFecha.setDate(Date.valueOf(enc.getFechaEnc()));
-            jcbJug1.setSelectedItem(enc.getJugador1()+"");
-            jcbJug2.setSelectedItem(enc.getJugador2()+"");
-            jcbEst.setSelectedItem(enc.getEstadio()+"");
-            jcbTorneo.setSelectedItem(enc.getTorneo()+"");
+            enc.setJugador1((Jugador) jcbJug1.getSelectedItem());
+            //jcbJug1.setSelectedItem(enc.getJugador1());
+            jcbJug2.setSelectedItem(enc.getJugador2());
+            jcbGanador.setSelectedItem(enc.getGanador());
+            jcbEst.setSelectedItem(enc.getEstadio());
+            jcbTorneo.setSelectedItem(enc.getTorneo());
             jchbActivo.setSelected(enc.isActivo());
+            cargarDatosGanador();
         }else{
             JOptionPane.showMessageDialog(this,"No se encontraron datos");
-        }
-            
-            
+        }      
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jcbJug2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbJug2ActionPerformed
+        // TODO add your handling code here:
+ 
+    }//GEN-LAST:event_jcbJug2ActionPerformed
+
+    private void jcbEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstActionPerformed
+        // TODO add your handling code here:
+   
+    }//GEN-LAST:event_jcbEstActionPerformed
+
+    private void jcbTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTorneoActionPerformed
+        // TODO add your handling code here:
+  
+    }//GEN-LAST:event_jcbTorneoActionPerformed
+
+    private void jcbGanadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbGanadorActionPerformed
+        // TODO add your handling code here:
+     
+    }//GEN-LAST:event_jcbGanadorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -402,7 +460,6 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
@@ -410,6 +467,7 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbLimpiar;
     private javax.swing.JTextField jcEstado;
     private javax.swing.JComboBox<Estadio> jcbEst;
+    private javax.swing.JComboBox<Jugador> jcbGanador;
     private javax.swing.JComboBox<Jugador> jcbJug1;
     private javax.swing.JComboBox<Jugador> jcbJug2;
     private javax.swing.JComboBox<Torneo> jcbTorneo;

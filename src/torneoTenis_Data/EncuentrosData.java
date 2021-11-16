@@ -162,7 +162,36 @@ public class EncuentrosData {
             JOptionPane.showMessageDialog(null, "ERROR \nEncuentro No Encontrado");
          }
     }
-           
+    public List<Jugador> listaPosibleGanador(int id_encuentro){
+        ArrayList<Jugador> listaDeJugadoresXPartido = new ArrayList<>();
+        String query = "SELECT encuentros.id_jugador1, encuentros.id_jugador2 FROM encuentros WHERE encuentros.id_encuentro = ? ";
+           try{
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id_encuentro);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Jugador j1 = new Jugador();
+                j1 = jd.buscarJugadorXId(rs.getInt("id_jugador1"));
+                
+                
+                Jugador j2 = new Jugador();
+                j2 = jd.buscarJugadorXId(rs.getInt("id_jugador2"));
+                //Jugador j = new Jugador();
+                //j.setId_jugador(rs.getInt("id_jugador1"));
+               
+                //Jugador j2 = new Jugador();
+                //j2.setId_jugador(rs.getInt("id_jugador2"));
+                
+                 listaDeJugadoresXPartido.add(j1);
+                 listaDeJugadoresXPartido.add(j2);
+            }
+            ps.close();
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "ERROR \nNo hay jugadores"+ ex.getMessage());   
+        }
+        return  listaDeJugadoresXPartido;
+    }       
     
     public List<Encuentros> listaDeEncuentros(){
         
@@ -239,7 +268,7 @@ public class EncuentrosData {
         
      ArrayList<Encuentros> listaDeEncuentrosFuturos = new ArrayList<>();
         
-        String query = "SELECT * FROM encuentros WHERE fechaEnc <= now() AND activo = true";
+        String query = "SELECT * FROM encuentros WHERE fechaEnc >= CURDATE() AND activo = true";
          
         try{
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);

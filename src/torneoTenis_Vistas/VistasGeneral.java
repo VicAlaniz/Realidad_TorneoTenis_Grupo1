@@ -114,6 +114,11 @@ public class VistasGeneral extends javax.swing.JFrame {
         jmConsultas.add(jmRanking);
 
         jmFutEnc.setText("Futuros Encuentros");
+        jmFutEnc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmFutEncActionPerformed(evt);
+            }
+        });
         jmConsultas.add(jmFutEnc);
 
         jMenu.add(jmConsultas);
@@ -201,6 +206,16 @@ public class VistasGeneral extends javax.swing.JFrame {
         esc.add(ven);
         esc.moveToFront(ven);
     }//GEN-LAST:event_jmEncuentrosActionPerformed
+
+    private void jmFutEncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFutEncActionPerformed
+        // TODO add your handling code here:
+        esc.removeAll();
+        esc.repaint();
+        VistaFuturosEncuentros vfe = new VistaFuturosEncuentros();
+        vfe.setVisible(true);
+        esc.add(vfe);
+        esc.moveToFront(vfe);
+    }//GEN-LAST:event_jmFutEncActionPerformed
                       
     /**
      * @param args the command line arguments
