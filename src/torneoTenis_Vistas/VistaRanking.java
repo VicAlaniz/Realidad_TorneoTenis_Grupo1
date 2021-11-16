@@ -23,7 +23,9 @@ public class VistaRanking extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo = new DefaultTableModel();
     private TorneoData torneoData;
     private Conectar conn;
+    private ArrayList<Torneo> listaTorneos;
     private ArrayList<Jugador> listaJugadores;
+    private ArrayList<Resultado> listaResultados;
     /**
      * Creates new form VistaRanking
      */
@@ -34,7 +36,7 @@ public class VistaRanking extends javax.swing.JInternalFrame {
         torneoData = new TorneoData(conn);
         
         armarCabeceraTabla();
-        cargarDatos();
+        cargarTorneos();
     }
     
      public void armarCabeceraTabla() {
@@ -73,10 +75,10 @@ public class VistaRanking extends javax.swing.JInternalFrame {
         for (Jugador j: lista) {
             modelo.addRow(new Object[] {j.getId_jugador(), j.getNombreApellido()});
         }
-        for (Resultado r: res){
-            if (r.getTorneo().getId_torneo()==t.getId_torneo()){
-            modelo.addRow(new Object[] {r.getTotal()});
-        }}
+        for (Resultado j: res){
+            //if (j.getTorneo().getId_torneo()==t.getId_torneo()){
+            modelo.addRow(new Object[] {j.getTotal()});
+        }
     }
 
     /**
