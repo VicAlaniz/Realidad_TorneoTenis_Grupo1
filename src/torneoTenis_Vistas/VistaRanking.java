@@ -37,7 +37,7 @@ public class VistaRanking extends javax.swing.JInternalFrame {
         
         armarCabeceraTabla();
         cargarTorneos();
-        cargarDatos();
+        
     }
     
      public void armarCabeceraTabla() {
@@ -70,12 +70,12 @@ public class VistaRanking extends javax.swing.JInternalFrame {
  
         Torneo t = (Torneo) jcbTorneos.getSelectedItem();
         
-     
-        List<Resultado> res = torneoData.calcularRanking(t.getId_torneo());
-        for (Resultado j: res){
-            if (j.getTorneo().getId_torneo()==t.getId_torneo()){
+           listaResultados = (ArrayList)torneoData.calcularRanking(t.getId_torneo());
+        //List<Resultado> res = torneoData.calcularRanking(t.getId_torneo());
+        for (Resultado j: listaResultados){
+           // if (j.getTorneo().getId_torneo()==t.getId_torneo()){
             modelo.addRow(new Object[] {j.getJugador().getId_jugador(), j.getJugador().getNombreApellido(), j.getTotal()});
-        }}
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -152,7 +152,7 @@ public class VistaRanking extends javax.swing.JInternalFrame {
 
     private void jcbTorneosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTorneosActionPerformed
         // TODO add your handling code here:
-        cargarTorneos();
+        cargarDatos();
     }//GEN-LAST:event_jcbTorneosActionPerformed
 
 

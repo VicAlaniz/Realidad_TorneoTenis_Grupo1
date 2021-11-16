@@ -35,7 +35,10 @@ public class VistasGeneral extends javax.swing.JFrame {
         jmEstadio = new javax.swing.JMenuItem();
         jmTorneo = new javax.swing.JMenuItem();
         jmSponsor = new javax.swing.JMenuItem();
+        jmEncuentros = new javax.swing.JMenuItem();
+        jmConsultas = new javax.swing.JMenu();
         jmRanking = new javax.swing.JMenuItem();
+        jmFutEnc = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -90,15 +93,30 @@ public class VistasGeneral extends javax.swing.JFrame {
         });
         jmCarga.add(jmSponsor);
 
+        jmEncuentros.setText("Encuentros");
+        jmEncuentros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmEncuentrosActionPerformed(evt);
+            }
+        });
+        jmCarga.add(jmEncuentros);
+
+        jMenu.add(jmCarga);
+
+        jmConsultas.setText("Consultas");
+
         jmRanking.setText("Ranking");
         jmRanking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmRankingActionPerformed(evt);
             }
         });
-        jmCarga.add(jmRanking);
+        jmConsultas.add(jmRanking);
 
-        jMenu.add(jmCarga);
+        jmFutEnc.setText("Futuros Encuentros");
+        jmConsultas.add(jmFutEnc);
+
+        jMenu.add(jmConsultas);
 
         jMenu2.setText("Salir");
         jMenu.add(jMenu2);
@@ -173,6 +191,16 @@ public class VistasGeneral extends javax.swing.JFrame {
         esc.add(vs);
         esc.moveToFront(vs);
     }//GEN-LAST:event_jmRankingActionPerformed
+
+    private void jmEncuentrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEncuentrosActionPerformed
+        // TODO add your handling code here:
+        esc.removeAll();
+        esc.repaint();
+        VistaEncuentros ven = new VistaEncuentros();
+        ven.setVisible(true);
+        esc.add(ven);
+        esc.moveToFront(ven);
+    }//GEN-LAST:event_jmEncuentrosActionPerformed
                       
     /**
      * @param args the command line arguments
@@ -214,7 +242,10 @@ public class VistasGeneral extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenu;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jmCarga;
+    private javax.swing.JMenu jmConsultas;
+    private javax.swing.JMenuItem jmEncuentros;
     private javax.swing.JMenuItem jmEstadio;
+    private javax.swing.JMenuItem jmFutEnc;
     private javax.swing.JMenuItem jmJugador;
     private javax.swing.JMenuItem jmRanking;
     private javax.swing.JMenuItem jmSponsor;

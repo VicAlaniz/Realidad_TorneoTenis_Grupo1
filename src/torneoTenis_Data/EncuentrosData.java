@@ -146,6 +146,24 @@ public class EncuentrosData {
          }
     }
     
+    public void borrarEncuentro(int id) {
+        String query = "UPDATE encuentros SET activo = false WHERE id_encuentro = ?";
+        
+        try{
+            PreparedStatement ps = conn.prepareStatement(query, id);
+            ps.setInt(1, id);
+            if(ps.executeUpdate()>0){
+                JOptionPane.showMessageDialog(null, "Encuentro Eliminado Exitosamente");
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al Intentar Eliminar Encuentro");
+             }
+            ps.close();
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "ERROR \nEncuentro No Encontrado");
+         }
+    }
+           
+    
     public List<Encuentros> listaDeEncuentros(){
         
      ArrayList<Encuentros> listaDeEncuentros = new ArrayList<>();
@@ -217,6 +235,41 @@ public class EncuentrosData {
          }
         return listaDeEncuentrosXJugador;  
     }
-    
+  public List<Encuentros> listaDeEncuentrosFuturos(){
+        
+     ArrayList<Encuentros> listaDeEncuentrosFuturos = new ArrayList<>();
+        
+        String query = "SELECT * FROM encuentros WHERE fechaEnc <= now() AND activo = true";
+         
+        try{
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rst = ps.executeQuery();
+            
+            while(rst.next()){
+                
+                Encuentros enc = new Encuentros();    
+                enc.setId_encuentro(rst.getInt("id_encuentro"));
+                enc.setFechaEnc(rst.getDate("fechaEnc").toLocalDate());
+                enc.setEstadoEnCurso(rst.getInt("estadoEnCurso"));
+                Jugador gan = jd.buscarJugadorXId(rst.getInt("ganador"));
+                enc.setGanador(gan);
+                Jugador j1 = jd.buscarJugadorXId(rst.getInt("id_jugador1"));
+                enc.setJugador1(j1);
+                Jugador j2 = jd.buscarJugadorXId(rst.getInt("id_jugador2"));
+                enc.setJugador2(j2);
+                Estadio es = ed.buscarEstadioXId(rst.getInt("id_estadio"));
+                enc.setEstadio(es);
+                Torneo tor = td.buscarTorneoXId(rst.getInt("id_torneo"));
+                enc.setTorneo(tor);
+                enc.setActivo(true);
+                
+                listaDeEncuentrosFuturos.add(enc);
+            }
+            ps.close();
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "ERROR \nNo hay Encuentros"+ ex.getMessage());   
+        }
+        return listaDeEncuentrosFuturos;
+    }  
    
 }
