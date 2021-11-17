@@ -24,8 +24,8 @@ import torneotenis.Jugador;
 public class JugadorData {
     private Connection conn = null;
     
-    public JugadorData(Conectar conexionJugador){
-        this.conn = (Connection) conexionJugador.getConexion();
+    public JugadorData(Conectar conn){
+        this.conn = (Connection) conn.getConexion();
     }
 
     

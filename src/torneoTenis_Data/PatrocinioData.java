@@ -107,7 +107,7 @@ public class PatrocinioData {
         return listaPatrocinio;  
     }
    
-    public List<Patrocinio> obtenerPatrocinioXJugador(int id){
+    /*public List<Patrocinio> obtenerPatrocinioXJugador(int id){
         Patrocinio p = null;
         ArrayList<Patrocinio> patrociniosXJugador = new ArrayList<>();
 
@@ -133,6 +133,33 @@ public class PatrocinioData {
             JOptionPane.showMessageDialog(null, "Error al crear la lista");
         }
         return patrociniosXJugador;
+    }*/
+    
+    public List<Sponsor> obtenerSponsorXJugador(int id){
+        Patrocinio p = null;
+        ArrayList<Sponsor> patrociniosXJugador = new ArrayList<>();
+
+        String query = "SELECT * FROM patrocinio WHERE id_jugador = ? AND activo = true";
+        try {
+            
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1,id); 
+            ResultSet rs = ps.executeQuery();            
+            
+            while(rs.next()){
+                p = new Patrocinio();
+                p.setId_patrocinio(rs.getInt("id_patrocinio"));
+                Jugador j = jd.buscarJugadorXId(rs.getInt("id_jugador"));
+                p.setJugador(j);
+                Sponsor s = sd.buscarSponsorXId(rs.getInt("id_sponsor"));
+                p.setSponsor(s);
+                p.setActivo(true);
+                patrociniosXJugador.add(s);
+            }      
+            ps.close();
+        }catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al crear la lista");
+        }
+        return patrociniosXJugador;
     }
-   
 }

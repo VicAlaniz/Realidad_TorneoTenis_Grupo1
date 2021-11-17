@@ -41,6 +41,7 @@ public class VistasGeneral extends javax.swing.JFrame {
         jmJugaTor = new javax.swing.JMenuItem();
         jmFutEnc = new javax.swing.JMenuItem();
         jmTorJug = new javax.swing.JMenuItem();
+        jmSponXJug = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -138,6 +139,14 @@ public class VistasGeneral extends javax.swing.JFrame {
             }
         });
         jmConsultas.add(jmTorJug);
+
+        jmSponXJug.setText("Sponsors por jugador");
+        jmSponXJug.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmSponXJugActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmSponXJug);
 
         jMenu.add(jmConsultas);
 
@@ -254,6 +263,16 @@ public class VistasGeneral extends javax.swing.JFrame {
         esc.add(vtj);
         esc.moveToFront(vtj);
     }//GEN-LAST:event_jmTorJugActionPerformed
+
+    private void jmSponXJugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSponXJugActionPerformed
+        // TODO add your handling code here:
+        esc.removeAll();
+        esc.repaint();
+        VistaSponsorsXJugador vsj = new VistaSponsorsXJugador();
+        vsj.setVisible(true);
+        esc.add(vsj);
+        esc.moveToFront(vsj);
+    }//GEN-LAST:event_jmSponXJugActionPerformed
                       
     /**
      * @param args the command line arguments
@@ -302,6 +321,7 @@ public class VistasGeneral extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmJugaTor;
     private javax.swing.JMenuItem jmJugador;
     private javax.swing.JMenuItem jmRanking;
+    private javax.swing.JMenuItem jmSponXJug;
     private javax.swing.JMenuItem jmSponsor;
     private javax.swing.JMenuItem jmTorJug;
     private javax.swing.JMenuItem jmTorneo;

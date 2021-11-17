@@ -44,10 +44,9 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         jugadorData = new JugadorData(conn);
         encuentrosData = new EncuentrosData(conn);
         
-        cargarDatosJugadores();
         cargarDatosTorneos();
+        cargarDatosJugadores();
         cargarDatosEstadios();
-     
     }
     
     public void cargarDatosJugadores() {
@@ -74,6 +73,12 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         List <Estadio> est = estadioData.listaDeEstadios();
         for(Estadio e: est){
             jcbEst.addItem(e);     
+        }
+    }
+     public void borrarCombo() {
+        int a = jcbEst.getSelectedIndex()-1;
+        for (int i=a; i>=0; i--){
+            jcbEst.removeAllItems();
         }
     }
 
@@ -239,7 +244,7 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(jtId, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbBuscar)
                                 .addGap(4, 4, 4))
                             .addGroup(layout.createSequentialGroup()
@@ -342,6 +347,7 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
+ 
         int estadoEnCurso=Integer.parseInt(jcEstado.getText());
         
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -407,19 +413,21 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
+        
         int id = Integer.parseInt(jtId.getText());
         Encuentros enc = encuentrosData.buscarEncuentro(id);
         
         if(enc != null) {
+           
             jtId.setText(enc.getId_encuentro()+"");
             jcEstado.setText(enc.getEstadoEnCurso()+"");
             jdcFecha.setDate(Date.valueOf(enc.getFechaEnc()));
-            enc.setJugador1((Jugador) jcbJug1.getSelectedItem());
-            //jcbJug1.setSelectedItem(enc.getJugador1());
-            jcbJug2.setSelectedItem(enc.getJugador2());
-            jcbGanador.setSelectedItem(enc.getGanador());
-            jcbEst.setSelectedItem(enc.getEstadio());
-            jcbTorneo.setSelectedItem(enc.getTorneo());
+            //enc.setJugador1((Jugador) jcbJug1.getSelectedItem());
+            jcbJug1.setSelectedItem(enc.getJugador1()+"");
+            jcbJug2.setSelectedItem(enc.getJugador2()+"");
+            jcbGanador.setSelectedItem(enc.getGanador()+"");
+            jcbEst.setSelectedItem(enc.getEstadio()+"");
+            jcbTorneo.setSelectedItem(enc.getTorneo()+"");
             jchbActivo.setSelected(enc.isActivo());
             cargarDatosGanador();
         }else{
@@ -429,17 +437,17 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
 
     private void jcbJug2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbJug2ActionPerformed
         // TODO add your handling code here:
- 
+        
     }//GEN-LAST:event_jcbJug2ActionPerformed
 
     private void jcbEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstActionPerformed
         // TODO add your handling code here:
-   
+       
     }//GEN-LAST:event_jcbEstActionPerformed
 
     private void jcbTorneoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTorneoActionPerformed
         // TODO add your handling code here:
-  
+        
     }//GEN-LAST:event_jcbTorneoActionPerformed
 
     private void jcbGanadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbGanadorActionPerformed
