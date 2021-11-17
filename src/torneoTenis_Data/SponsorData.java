@@ -92,13 +92,14 @@ public class SponsorData {
             JOptionPane.showMessageDialog(null, "ERROR \nSponsor No Encontrado");
          }
     }
-    public Sponsor buscarSponsor(String marca){
+    public Sponsor buscarSponsor(String marca, String indumentaria){
                 Sponsor s = new Sponsor();
         
-        String query = "SELECT * FROM sponsor WHERE marca = ?";
+        String query = "SELECT * FROM sponsor WHERE marca = ? AND indumentaria = ?";
         try{
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, marca);
+            ps.setString(2, indumentaria);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){

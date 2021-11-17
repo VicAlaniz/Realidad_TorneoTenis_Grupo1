@@ -80,6 +80,31 @@ public class Torneo {
     public String toString() {
         return "Torneo: " + nombre;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.id_torneo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Torneo other = (Torneo) obj;
+        if (this.id_torneo != other.id_torneo) {
+            return false;
+        }
+        return true;
+    }
     
     
 }

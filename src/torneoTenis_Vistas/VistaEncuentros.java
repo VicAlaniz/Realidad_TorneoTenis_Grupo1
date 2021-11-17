@@ -124,7 +124,7 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("ENCUENTROS");
 
-        jLabel2.setText("ID Encuentro:");
+        jLabel2.setText("N° Encuentro:");
 
         jLabel3.setText("Fecha Encuentro:");
 
@@ -260,18 +260,22 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
                                 .addComponent(jdcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel5))
-                                .addGap(25, 25, 25)
-                                .addComponent(jcbTorneo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(185, 185, 185))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(25, 25, 25))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jcbTorneo, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(172, 172, 172))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                                .addComponent(jcbEst, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(240, 240, 240))
+                                .addComponent(jcbEst, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(226, 226, 226))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
@@ -324,7 +328,7 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
                             .addComponent(jcbEst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
                         .addComponent(jLabel10)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar)
                     .addComponent(jbActualizar)
@@ -416,18 +420,17 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         
         int id = Integer.parseInt(jtId.getText());
         Encuentros enc = encuentrosData.buscarEncuentro(id);
-        
+       
         if(enc != null) {
            
             jtId.setText(enc.getId_encuentro()+"");
             jcEstado.setText(enc.getEstadoEnCurso()+"");
             jdcFecha.setDate(Date.valueOf(enc.getFechaEnc()));
-            //enc.setJugador1((Jugador) jcbJug1.getSelectedItem());
-            jcbJug1.setSelectedItem(enc.getJugador1()+"");
-            jcbJug2.setSelectedItem(enc.getJugador2()+"");
-            jcbGanador.setSelectedItem(enc.getGanador()+"");
-            jcbEst.setSelectedItem(enc.getEstadio()+"");
-            jcbTorneo.setSelectedItem(enc.getTorneo()+"");
+            jcbJug1.setSelectedItem(enc.getJugador1());
+            jcbJug2.setSelectedItem(enc.getJugador2());
+            jcbGanador.setSelectedItem(enc.getGanador());
+            jcbEst.setSelectedItem(enc.getEstadio());
+            jcbTorneo.setSelectedItem(enc.getTorneo());
             jchbActivo.setSelected(enc.isActivo());
             cargarDatosGanador();
         }else{

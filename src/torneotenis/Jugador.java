@@ -124,6 +124,31 @@ public class Jugador {
     public String toString() {
         return "id " + id_jugador + ": " + nombreApellido;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 23 * hash + this.id_jugador;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Jugador other = (Jugador) obj;
+        if (this.id_jugador != other.id_jugador) {
+            return false;
+        }
+        return true;
+    }
     
     
     

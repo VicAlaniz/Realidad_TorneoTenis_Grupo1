@@ -133,6 +133,31 @@ public class Estadio {
     public String toString() {
         return "Estadio: " + nombre;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 73 * hash + this.id_estadio;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Estadio other = (Estadio) obj;
+        if (this.id_estadio != other.id_estadio) {
+            return false;
+        }
+        return true;
+    }
     
     
     

@@ -19,7 +19,7 @@ import torneotenis.Sponsor;
  *
  * @author Administrador
  */
-public class VistaSponsorsXJugador extends javax.swing.JInternalFrame {
+public class VistaJugadoresXSponsor extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo = new DefaultTableModel();
     private Conectar conn;
     private JugadorData jugador;
@@ -29,42 +29,41 @@ public class VistaSponsorsXJugador extends javax.swing.JInternalFrame {
     private ArrayList<Sponsor> listaSponsor;
 
     /**
-     * Creates new form VistaSponsorsXJugador
+     * Creates new form VistaJugadoresXSponsor
      */
-    public VistaSponsorsXJugador() {
+    public VistaJugadoresXSponsor() {
         initComponents();
         conn = new Conectar();
         jugador = new JugadorData(conn);
         sponsor = new SponsorData(conn);
         pat = new PatrocinioData(conn);
         Patrocinio p = new Patrocinio();
-        listaJugadores = (ArrayList) jugador.listaDeJugadores();
+        listaSponsor = (ArrayList) sponsor.listaDeSponsors();
         
         armarCabeceraTabla();
-        cargarJugadores();
+        cargarSponsors();
         cargarDatos();
     }
-    
     public void armarCabeceraTabla() {
-        jtSponsors.getTableHeader().setReorderingAllowed(false);
+        jtJugadores.getTableHeader().setReorderingAllowed(false);
         
         ArrayList<Object> columnas = new ArrayList<Object>();
         
         columnas.add("ID");
-        columnas.add("Marca");
-        columnas.add("Indumentaria");
+        columnas.add("Nombre");
+        columnas.add("DNI");
 
         
         for (Object it: columnas) {
             modelo.addColumn(it);
         }
-        jtSponsors.setModel(modelo);
+        jtJugadores.setModel(modelo);
     }
     
-    public void cargarJugadores() {
+    public void cargarSponsors() {
         
-        for(Jugador item: listaJugadores) {
-            jcbJugador.addItem(item);
+        for(Sponsor item: listaSponsor) {
+            jcbSponsor.addItem(item);
         }
     } 
      public void borrarFilasTabla() {
@@ -79,11 +78,11 @@ public class VistaSponsorsXJugador extends javax.swing.JInternalFrame {
           
         borrarFilasTabla();
         
-        Jugador j = (Jugador)jcbJugador.getSelectedItem();
-        listaSponsor = (ArrayList)pat.obtenerSponsorXJugador(j.getId_jugador());
+        Sponsor s = (Sponsor)jcbSponsor.getSelectedItem();
+        listaJugadores = (ArrayList)pat.obtenerJugadoresXSponsor(s.getId_sponsor());
 
-        for (Sponsor s: listaSponsor){
-            modelo.addRow(new Object[] {s.getId_sponsor(), s.getMarca(), s.getIndumentaria()});
+        for (Jugador j: listaJugadores){
+            modelo.addRow(new Object[] {j.getId_jugador(), j.getNombreApellido(), j.getDni()});
         }
     }
 
@@ -96,25 +95,27 @@ public class VistaSponsorsXJugador extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jcbJugador = new javax.swing.JComboBox<>();
-        jlJugador = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jcbSponsor = new javax.swing.JComboBox<>();
+        jlSponsor = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtSponsors = new javax.swing.JTable();
-        jlTitulo4 = new javax.swing.JLabel();
+        jtJugadores = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
 
-        jcbJugador.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setText("Jugadores por Sponsor");
+
+        jcbSponsor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbJugadorActionPerformed(evt);
+                jcbSponsorActionPerformed(evt);
             }
         });
 
-        jlJugador.setText("Jugador");
+        jlSponsor.setText("Sponsor");
 
-        jtSponsors.setModel(new javax.swing.table.DefaultTableModel(
+        jtJugadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -125,9 +126,7 @@ public class VistaSponsorsXJugador extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jtSponsors);
-
-        jlTitulo4.setText("Sponsors por Jugador");
+        jScrollPane1.setViewportView(jtJugadores);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,45 +135,46 @@ public class VistaSponsorsXJugador extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(111, 111, 111)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(jlJugador)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlTitulo4)
-                            .addComponent(jcbJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addGap(61, 61, 61)
+                        .addComponent(jlSponsor)
+                        .addGap(42, 42, 42)
+                        .addComponent(jcbSponsor, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlTitulo4)
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbJugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlJugador))
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbSponsor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlSponsor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jcbJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbJugadorActionPerformed
+    private void jcbSponsorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSponsorActionPerformed
         // TODO add your handling code here:
         cargarDatos();
-    }//GEN-LAST:event_jcbJugadorActionPerformed
+    }//GEN-LAST:event_jcbSponsorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<Jugador> jcbJugador;
-    private javax.swing.JLabel jlJugador;
-    private javax.swing.JLabel jlTitulo4;
-    private javax.swing.JTable jtSponsors;
+    private javax.swing.JComboBox<Sponsor> jcbSponsor;
+    private javax.swing.JLabel jlSponsor;
+    private javax.swing.JTable jtJugadores;
     // End of variables declaration//GEN-END:variables
 }

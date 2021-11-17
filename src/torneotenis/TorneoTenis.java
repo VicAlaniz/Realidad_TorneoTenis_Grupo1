@@ -125,7 +125,7 @@ public class TorneoTenis {
         
         //System.out.println("Patrocinio: " + pd.obtenerPatrocinioXJugador(24));
         //System.out.println("Encuentros: " + ed.listaEncuentrosXJugador(25));
-        //System.out.println(ed.buscarEncuentro(18));
+        //System.out.println(ed.buscarEncuentro(20).getJugador1());
         //System.out.println("Jugadores: " + td.listaJugadoresXTorneo(3));
         //System.out.println("Jugadores: " + td.listaTorneosXJugador(25));
         //System.out.println(ed.listaEncuentrosXJugador(25));
@@ -134,7 +134,7 @@ public class TorneoTenis {
             //System.out.println(r.getTorneo().getNombre());
             //System.out.println(r.getTotal());
             
-        System.out.println(ed.listaPosibleGanador(17));
+        //System.out.println(ed.listaPosibleGanador(17));
             
         
     }

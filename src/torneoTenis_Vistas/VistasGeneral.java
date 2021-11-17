@@ -5,6 +5,11 @@
  */
 package torneoTenis_Vistas;
 
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Administrador
@@ -28,7 +33,13 @@ public class VistasGeneral extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        esc = new javax.swing.JDesktopPane();
+        ImageIcon icono = new ImageIcon(getClass().getResource("/imagen/cancha.jpg"));
+        Image miImagen = icono.getImage();
+        esc = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(miImagen, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
         jMenu = new javax.swing.JMenuBar();
         jmCarga = new javax.swing.JMenu();
         jmJugador = new javax.swing.JMenuItem();
@@ -42,6 +53,7 @@ public class VistasGeneral extends javax.swing.JFrame {
         jmFutEnc = new javax.swing.JMenuItem();
         jmTorJug = new javax.swing.JMenuItem();
         jmSponXJug = new javax.swing.JMenuItem();
+        jmJugXSpon = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -148,6 +160,14 @@ public class VistasGeneral extends javax.swing.JFrame {
         });
         jmConsultas.add(jmSponXJug);
 
+        jmJugXSpon.setText("Jugadores por Sponsor");
+        jmJugXSpon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmJugXSponActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmJugXSpon);
+
         jMenu.add(jmConsultas);
 
         jMenu2.setText("Salir");
@@ -176,6 +196,9 @@ public class VistasGeneral extends javax.swing.JFrame {
           VistaEstadio ve = new VistaEstadio();
           ve.setVisible(true);
           esc.add(ve);
+          Dimension desktopSize = esc.getSize();
+          Dimension FrameSize = ve.getSize();
+          ve.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
           esc.moveToFront(ve);
         
     }//GEN-LAST:event_jmEstadioActionPerformed
@@ -187,6 +210,9 @@ public class VistasGeneral extends javax.swing.JFrame {
           VistaJugador vj = new VistaJugador();
           vj.setVisible(true);
           esc.add(vj);
+          Dimension desktopSize = esc.getSize();
+          Dimension FrameSize = vj.getSize();
+          vj.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
           esc.moveToFront(vj);
     }//GEN-LAST:event_jmJugadorActionPerformed
 
@@ -201,6 +227,9 @@ public class VistasGeneral extends javax.swing.JFrame {
          VistaTorneo vt = new VistaTorneo();
           vt.setVisible(true);
           esc.add(vt);
+          Dimension desktopSize = esc.getSize();
+          Dimension FrameSize = vt.getSize();
+          vt.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
           esc.moveToFront(vt);
     }//GEN-LAST:event_jmTorneoActionPerformed
 
@@ -211,6 +240,9 @@ public class VistasGeneral extends javax.swing.JFrame {
          VistaSponsorPatrocinio vs = new VistaSponsorPatrocinio();
          vs.setVisible(true);
          esc.add(vs);
+         Dimension desktopSize = esc.getSize();
+         Dimension FrameSize = vs.getSize();
+         vs.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
          esc.moveToFront(vs);
     }//GEN-LAST:event_jmSponsorActionPerformed
 
@@ -218,10 +250,13 @@ public class VistasGeneral extends javax.swing.JFrame {
         // TODO add your handling code here:
         esc.removeAll();
         esc.repaint();
-        VistaRanking vs = new VistaRanking();
-        vs.setVisible(true);
-        esc.add(vs);
-        esc.moveToFront(vs);
+        VistaRanking vr = new VistaRanking();
+        vr.setVisible(true);
+        esc.add(vr);
+        Dimension desktopSize = esc.getSize();
+        Dimension FrameSize = vr.getSize();
+        vr.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        esc.moveToFront(vr);
     }//GEN-LAST:event_jmRankingActionPerformed
 
     private void jmEncuentrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEncuentrosActionPerformed
@@ -231,6 +266,9 @@ public class VistasGeneral extends javax.swing.JFrame {
         VistaEncuentros ven = new VistaEncuentros();
         ven.setVisible(true);
         esc.add(ven);
+        Dimension desktopSize = esc.getSize();
+        Dimension FrameSize = ven.getSize();
+        ven.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         esc.moveToFront(ven);
     }//GEN-LAST:event_jmEncuentrosActionPerformed
 
@@ -241,6 +279,9 @@ public class VistasGeneral extends javax.swing.JFrame {
         VistaFuturosEncuentros vfe = new VistaFuturosEncuentros();
         vfe.setVisible(true);
         esc.add(vfe);
+        Dimension desktopSize = esc.getSize();
+        Dimension FrameSize = vfe.getSize();
+        vfe.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         esc.moveToFront(vfe);
     }//GEN-LAST:event_jmFutEncActionPerformed
 
@@ -251,6 +292,9 @@ public class VistasGeneral extends javax.swing.JFrame {
         VistaJugadoresXTorneo vjt = new VistaJugadoresXTorneo();
         vjt.setVisible(true);
         esc.add(vjt);
+        Dimension desktopSize = esc.getSize();
+        Dimension FrameSize = vjt.getSize();
+        vjt.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         esc.moveToFront(vjt);
     }//GEN-LAST:event_jmJugaTorActionPerformed
 
@@ -261,6 +305,9 @@ public class VistasGeneral extends javax.swing.JFrame {
         VistaTorneosXJugador vtj = new VistaTorneosXJugador();
         vtj.setVisible(true);
         esc.add(vtj);
+        Dimension desktopSize = esc.getSize();
+        Dimension FrameSize = vtj.getSize();
+        vtj.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         esc.moveToFront(vtj);
     }//GEN-LAST:event_jmTorJugActionPerformed
 
@@ -271,8 +318,24 @@ public class VistasGeneral extends javax.swing.JFrame {
         VistaSponsorsXJugador vsj = new VistaSponsorsXJugador();
         vsj.setVisible(true);
         esc.add(vsj);
+        Dimension desktopSize = esc.getSize();
+        Dimension FrameSize = vsj.getSize();
+        vsj.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         esc.moveToFront(vsj);
     }//GEN-LAST:event_jmSponXJugActionPerformed
+
+    private void jmJugXSponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmJugXSponActionPerformed
+        // TODO add your handling code here:
+        esc.removeAll();
+        esc.repaint();
+        VistaJugadoresXSponsor vjs = new VistaJugadoresXSponsor();
+        vjs.setVisible(true);
+        esc.add(vjs);
+        Dimension desktopSize = esc.getSize();
+        Dimension FrameSize = vjs.getSize();
+        vjs.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        esc.moveToFront(vjs);
+    }//GEN-LAST:event_jmJugXSponActionPerformed
                       
     /**
      * @param args the command line arguments
@@ -318,6 +381,7 @@ public class VistasGeneral extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmEncuentros;
     private javax.swing.JMenuItem jmEstadio;
     private javax.swing.JMenuItem jmFutEnc;
+    private javax.swing.JMenuItem jmJugXSpon;
     private javax.swing.JMenuItem jmJugaTor;
     private javax.swing.JMenuItem jmJugador;
     private javax.swing.JMenuItem jmRanking;

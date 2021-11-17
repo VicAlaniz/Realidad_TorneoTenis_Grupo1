@@ -69,6 +69,31 @@ public class Sponsor {
     public String toString() {
         return marca + ", " + indumentaria;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + this.id_sponsor;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Sponsor other = (Sponsor) obj;
+        if (this.id_sponsor != other.id_sponsor) {
+            return false;
+        }
+        return true;
+    }
     
     
     
