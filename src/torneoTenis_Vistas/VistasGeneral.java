@@ -38,7 +38,9 @@ public class VistasGeneral extends javax.swing.JFrame {
         jmEncuentros = new javax.swing.JMenuItem();
         jmConsultas = new javax.swing.JMenu();
         jmRanking = new javax.swing.JMenuItem();
+        jmJugaTor = new javax.swing.JMenuItem();
         jmFutEnc = new javax.swing.JMenuItem();
+        jmTorJug = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -113,6 +115,14 @@ public class VistasGeneral extends javax.swing.JFrame {
         });
         jmConsultas.add(jmRanking);
 
+        jmJugaTor.setText("Jugadores por torneo");
+        jmJugaTor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmJugaTorActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmJugaTor);
+
         jmFutEnc.setText("Futuros Encuentros");
         jmFutEnc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +130,14 @@ public class VistasGeneral extends javax.swing.JFrame {
             }
         });
         jmConsultas.add(jmFutEnc);
+
+        jmTorJug.setText("Torneos por jugador");
+        jmTorJug.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmTorJugActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmTorJug);
 
         jMenu.add(jmConsultas);
 
@@ -216,6 +234,26 @@ public class VistasGeneral extends javax.swing.JFrame {
         esc.add(vfe);
         esc.moveToFront(vfe);
     }//GEN-LAST:event_jmFutEncActionPerformed
+
+    private void jmJugaTorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmJugaTorActionPerformed
+        // TODO add your handling code here:
+        esc.removeAll();
+        esc.repaint();
+        VistaJugadoresXTorneo vjt = new VistaJugadoresXTorneo();
+        vjt.setVisible(true);
+        esc.add(vjt);
+        esc.moveToFront(vjt);
+    }//GEN-LAST:event_jmJugaTorActionPerformed
+
+    private void jmTorJugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmTorJugActionPerformed
+        // TODO add your handling code here:
+        esc.removeAll();
+        esc.repaint();
+        VistaTorneosXJugador vtj = new VistaTorneosXJugador();
+        vtj.setVisible(true);
+        esc.add(vtj);
+        esc.moveToFront(vtj);
+    }//GEN-LAST:event_jmTorJugActionPerformed
                       
     /**
      * @param args the command line arguments
@@ -261,9 +299,11 @@ public class VistasGeneral extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmEncuentros;
     private javax.swing.JMenuItem jmEstadio;
     private javax.swing.JMenuItem jmFutEnc;
+    private javax.swing.JMenuItem jmJugaTor;
     private javax.swing.JMenuItem jmJugador;
     private javax.swing.JMenuItem jmRanking;
     private javax.swing.JMenuItem jmSponsor;
+    private javax.swing.JMenuItem jmTorJug;
     private javax.swing.JMenuItem jmTorneo;
     // End of variables declaration//GEN-END:variables
 }
