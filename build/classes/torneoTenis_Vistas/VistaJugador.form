@@ -253,6 +253,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jtId">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtNom">
       <Events>
@@ -260,10 +263,19 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jtDni">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtDniFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jtAltura">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtAlturaFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jtPeso">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtPesoFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="jcbEstilo">
       <Properties>

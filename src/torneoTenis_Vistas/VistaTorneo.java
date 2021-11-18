@@ -87,7 +87,6 @@ public class VistaTorneo extends javax.swing.JInternalFrame {
         jLabel6.setText("Activo");
 
         jtId.setEditable(false);
-        jtId.setEnabled(false);
 
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {

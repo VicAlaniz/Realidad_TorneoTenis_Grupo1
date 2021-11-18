@@ -43,6 +43,7 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         estadioData = new EstadioData(conn);
         jugadorData = new JugadorData(conn);
         encuentrosData = new EncuentrosData(conn);
+        Torneo t = new Torneo();
         
         cargarDatosTorneos();
         cargarDatosJugadores();
@@ -176,6 +177,12 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
             }
         });
 
+        jdcFecha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jdcFechaFocusLost(evt);
+            }
+        });
+
         jcbJug2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbJug2ActionPerformed(evt);
@@ -197,6 +204,12 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         jcbTorneo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbTorneoActionPerformed(evt);
+            }
+        });
+
+        jtId.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtIdFocusLost(evt);
             }
         });
 
@@ -266,7 +279,6 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel9)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                .addGap(18, 18, 18)
                                 .addComponent(jcbTorneo, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(172, 172, 172))
                     .addGroup(layout.createSequentialGroup()
@@ -457,6 +469,28 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
      
     }//GEN-LAST:event_jcbGanadorActionPerformed
+
+    private void jtIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtIdFocusLost
+        // TODO add your handling code here:
+        try {
+            int enc = Integer.parseInt(jtId.getText());
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "Usted ingresó un digito incorrecto");
+            jtId.requestFocus();
+        }
+    }//GEN-LAST:event_jtIdFocusLost
+
+    private void jdcFechaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jdcFechaFocusLost
+        // TODO add your handling code here:
+        
+        try {
+            Date fecha = Date.valueOf(jdcFecha.getDateFormatString());
+
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "Usted ingresó un digito incorrecto");
+            jdcFecha.requestFocus();
+        }
+    }//GEN-LAST:event_jdcFechaFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

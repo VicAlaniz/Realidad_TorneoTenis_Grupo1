@@ -117,9 +117,29 @@ public class VistaJugador extends javax.swing.JInternalFrame {
             }
         });
 
+        jtId.setEditable(false);
+
         jtNom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtNomActionPerformed(evt);
+            }
+        });
+
+        jtDni.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtDniFocusLost(evt);
+            }
+        });
+
+        jtAltura.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtAlturaFocusLost(evt);
+            }
+        });
+
+        jtPeso.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtPesoFocusLost(evt);
             }
         });
 
@@ -336,6 +356,36 @@ public class VistaJugador extends javax.swing.JInternalFrame {
         jcbEstilo.setSelectedIndex(-1);
         jcbMano.setSelectedIndex(-1);
     }//GEN-LAST:event_jbLimpiarActionPerformed
+
+    private void jtAlturaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtAlturaFocusLost
+        // TODO add your handling code here:
+        try {
+            float altura = Float.parseFloat(jtAltura.getText());
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "Usted ingresó un digito incorrecto");
+            jtAltura.requestFocus();
+        }
+    }//GEN-LAST:event_jtAlturaFocusLost
+
+    private void jtPesoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtPesoFocusLost
+        // TODO add your handling code here:
+        try {
+            float peso = Float.parseFloat(jtPeso.getText());
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "Usted ingresó un digito incorrecto");
+            jtPeso.requestFocus();
+        }
+    }//GEN-LAST:event_jtPesoFocusLost
+
+    private void jtDniFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtDniFocusLost
+        // TODO add your handling code here:
+        try {
+            int dni = Integer.parseInt(jtDni.getText());
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "Usted ingresó un digito incorrecto");
+            jtDni.requestFocus();
+        }
+    }//GEN-LAST:event_jtDniFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

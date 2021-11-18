@@ -234,6 +234,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtId">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtNombre">
       <Events>
@@ -243,8 +246,14 @@
     <Component class="javax.swing.JTextField" name="jtCiudad">
     </Component>
     <Component class="javax.swing.JTextField" name="jtAncho">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtAnchoFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jtLargo">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtLargoFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jtDireccion">
     </Component>
@@ -263,6 +272,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="jtCapacidad">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtCapacidadFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jchbActivo">
     </Component>

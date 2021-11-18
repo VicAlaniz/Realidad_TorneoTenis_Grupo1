@@ -88,7 +88,6 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jcbTorneo" min="-2" pref="166" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -275,6 +274,9 @@
       </Events>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jdcFecha">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jdcFechaFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="jcbJug2">
       <Properties>
@@ -329,6 +331,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="jtId">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtIdFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jcEstado">
     </Component>

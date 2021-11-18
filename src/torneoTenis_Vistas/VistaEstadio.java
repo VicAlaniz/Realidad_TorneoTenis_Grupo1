@@ -97,13 +97,33 @@ public class VistaEstadio extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Activo");
 
+        jtId.setEditable(false);
+
         jtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtNombreActionPerformed(evt);
             }
         });
 
+        jtAncho.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtAnchoFocusLost(evt);
+            }
+        });
+
+        jtLargo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtLargoFocusLost(evt);
+            }
+        });
+
         jcbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Césped", "Ladrillo", "Cemento" }));
+
+        jtCapacidad.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtCapacidadFocusLost(evt);
+            }
+        });
 
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -341,6 +361,38 @@ public class VistaEstadio extends javax.swing.JInternalFrame {
         jchbActivo.setSelected(false);
         jcbCategoria.setSelectedIndex(-1);
     }//GEN-LAST:event_jbLimpiarActionPerformed
+
+    private void jtAnchoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtAnchoFocusLost
+        // TODO add your handling code here:
+        try {
+            float ancho = Float.parseFloat(jtAncho.getText());
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "Usted ingresó un digito incorrecto");
+            jtAncho.requestFocus();
+        }
+    }//GEN-LAST:event_jtAnchoFocusLost
+
+    private void jtLargoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtLargoFocusLost
+        // TODO add your handling code here:
+        try {
+            float largo = Float.parseFloat(jtLargo.getText());
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "Usted ingresó un digito incorrecto");
+            jtLargo.requestFocus();
+        }
+    }//GEN-LAST:event_jtLargoFocusLost
+
+    private void jtCapacidadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtCapacidadFocusLost
+        // TODO add your handling code here:
+        try {
+            int capa = Integer.parseInt(jtCapacidad.getText());
+            if(capa < 2000 || capa > 20000){
+                JOptionPane.showMessageDialog(this, "La capacidad debe ser entre 2000 y 20000");
+        }} catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "Usted ingresó un digito incorrecto");
+            jtCapacidad.requestFocus();
+        }
+    }//GEN-LAST:event_jtCapacidadFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -84,7 +84,6 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
         jtIdPat = new javax.swing.JTextField();
         jcbSponsor = new javax.swing.JComboBox<>();
         jbGuardarPat = new javax.swing.JButton();
-        jbEliminarPat = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jchbActivoP = new javax.swing.JCheckBox();
         jbBuscar = new javax.swing.JButton();
@@ -106,6 +105,8 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
         jLabel5.setText("Indumentaria:");
 
         jLabel6.setText("Activo");
+
+        jtIdSpon.setEditable(false);
 
         jbGuardarSpon.setText("Guardar Sponsor");
         jbGuardarSpon.addActionListener(new java.awt.event.ActionListener() {
@@ -134,17 +135,12 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Jugador:");
 
+        jtIdPat.setEditable(false);
+
         jbGuardarPat.setText("Firmar Contrato");
         jbGuardarPat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarPatActionPerformed(evt);
-            }
-        });
-
-        jbEliminarPat.setText("Eliminar");
-        jbEliminarPat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbEliminarPatActionPerformed(evt);
             }
         });
 
@@ -196,40 +192,40 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jbEliminarSpon, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbActualizar))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(56, 56, 56)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(28, 28, 28)
-                                        .addComponent(jLabel2))
+                                        .addComponent(jLabel7)
+                                        .addGap(56, 56, 56)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(28, 28, 28)
+                                                .addComponent(jLabel2))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(10, 10, 10)
+                                                .addComponent(jtIdPat, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jtIdPat, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jLabel8)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jcbSponsor, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jchbActivoP)
+                                            .addComponent(jcbJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 83, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18)
-                                .addComponent(jcbSponsor, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jchbActivoP)
-                                    .addComponent(jcbJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 83, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(jbGuardarPat)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbEliminarPat)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jLabel10)
+                                .addContainerGap(319, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbGuardarPat)
+                        .addGap(128, 128, 128))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,17 +268,16 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
                         .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbGuardarSpon)
-                            .addComponent(jbActualizar)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbGuardarPat)
-                            .addComponent(jbEliminarPat))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbBuscar)
-                    .addComponent(jbEliminarSpon))
-                .addContainerGap(15, Short.MAX_VALUE))
+                            .addComponent(jbActualizar))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbGuardarPat)
+                        .addGap(37, 37, 37)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbEliminarSpon)
+                    .addComponent(jbBuscar))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -333,12 +328,6 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jbGuardarPatActionPerformed
 
-    private void jbEliminarPatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarPatActionPerformed
-        // TODO add your handling code here:
-        int id_patrocinio = Integer.parseInt(jtIdPat.getText());
-        patrocinioData.borrarPatrocinio(id_patrocinio, ERROR);
-    }//GEN-LAST:event_jbEliminarPatActionPerformed
-
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
         //int id_sponsor = Integer.parseInt(jtIdSpon.getText());
@@ -371,7 +360,6 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbBuscar;
-    private javax.swing.JButton jbEliminarPat;
     private javax.swing.JButton jbEliminarSpon;
     private javax.swing.JButton jbGuardarPat;
     private javax.swing.JButton jbGuardarSpon;

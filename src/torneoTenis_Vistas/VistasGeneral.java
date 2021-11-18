@@ -54,7 +54,6 @@ public class VistasGeneral extends javax.swing.JFrame {
         jmTorJug = new javax.swing.JMenuItem();
         jmSponXJug = new javax.swing.JMenuItem();
         jmJugXSpon = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -169,9 +168,6 @@ public class VistasGeneral extends javax.swing.JFrame {
         jmConsultas.add(jmJugXSpon);
 
         jMenu.add(jmConsultas);
-
-        jMenu2.setText("Salir");
-        jMenu.add(jMenu2);
 
         setJMenuBar(jMenu);
 
@@ -375,7 +371,6 @@ public class VistasGeneral extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane esc;
     private javax.swing.JMenuBar jMenu;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jmCarga;
     private javax.swing.JMenu jmConsultas;
     private javax.swing.JMenuItem jmEncuentros;
