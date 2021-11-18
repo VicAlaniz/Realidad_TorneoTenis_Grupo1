@@ -182,6 +182,11 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
                 jdcFechaFocusLost(evt);
             }
         });
+        jdcFecha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jdcFechaMouseExited(evt);
+            }
+        });
 
         jcbJug2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -472,25 +477,44 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
 
     private void jtIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtIdFocusLost
         // TODO add your handling code here:
-        try {
-            int enc = Integer.parseInt(jtId.getText());
-        } catch (NumberFormatException nf) {
-            JOptionPane.showMessageDialog(this, "Usted ingresó un digito incorrecto");
-            jtId.requestFocus();
-        }
+       // try {
+            //int enc = Integer.parseInt(jtId.getText());
+        //} catch (NumberFormatException nf) {
+         //   JOptionPane.showMessageDialog(this, "Usted ingresó un digito incorrecto");
+         //   jtId.requestFocus();
+        //}
     }//GEN-LAST:event_jtIdFocusLost
 
     private void jdcFechaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jdcFechaFocusLost
         // TODO add your handling code here:
+        Torneo torneo = (Torneo) jcbTorneo.getSelectedItem();
         
+        LocalDate fechaEncIni = torneo.getFecha_ini();
+        //Date fechaEncIn = (Date) Date.from(fechaEncIni.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        LocalDate fechaEncFi = torneo.getFecha_fin();
+        //Date fechaFi = (Date) Date.from(fechaEncFi.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        System.out.println("Error");
         try {
-            Date fecha = Date.valueOf(jdcFecha.getDateFormatString());
+           SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+           String fecha = formato.format(jdcFecha.getDate());
+           LocalDate fechaEnc=LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
+            if (fechaEnc.isBefore(fechaEncIni) || fechaEnc.isAfter(fechaEncFi)){
+                JOptionPane.showMessageDialog(this, "La fecha del encuentro no esta en el rango del torneo, fecha inicio: "+fechaEncIni+" y fecha fin: "+fechaEncFi);
+            }
+            else {
+                System.out.println("Error");
+            }
+                
         } catch (NumberFormatException nf) {
-            JOptionPane.showMessageDialog(this, "Usted ingresó un digito incorrecto");
+            JOptionPane.showMessageDialog(this, "Usted ingresó mal la fecha");
             jdcFecha.requestFocus();
         }
     }//GEN-LAST:event_jdcFechaFocusLost
+
+    private void jdcFechaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jdcFechaMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jdcFechaMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
