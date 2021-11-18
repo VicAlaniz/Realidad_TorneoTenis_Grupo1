@@ -178,6 +178,9 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         });
 
         jdcFecha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jdcFechaFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jdcFechaFocusLost(evt);
             }
@@ -380,11 +383,23 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         Estadio estadio = (Estadio) jcbEst.getSelectedItem();
         Torneo torneo = (Torneo) jcbTorneo.getSelectedItem();
         boolean activo=jchbActivo.isEnabled();
+        LocalDate fechaEncIni = torneo.getFecha_ini();
+        LocalDate fechaEncFi = torneo.getFecha_fin();
         
-        Encuentros enc = new Encuentros(fechaEnc, estadoEnCurso, jugador1, jugador2, estadio, torneo, activo);
-        
-        encuentrosData.guardarEncuentros(enc);
-        jtId.setText(enc.getId_encuentro() + "");
+        try {
+
+            if (fechaEnc.isBefore(fechaEncIni) || fechaEnc.isAfter(fechaEncFi)){
+                JOptionPane.showMessageDialog(this, "La fecha del encuentro no esta en el rango del torneo, fecha inicio: "+fechaEncIni+" y fecha fin: "+fechaEncFi);
+            }
+            else {
+                 Encuentros enc = new Encuentros(fechaEnc, estadoEnCurso, jugador1, jugador2, estadio, torneo, activo);
+               encuentrosData.guardarEncuentros(enc);
+                jtId.setText(enc.getId_encuentro() + "");
+            }
+                
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "Usted ingresó mal la fecha");  
+        }  
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
@@ -404,8 +419,22 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         Torneo torneo = (Torneo) jcbTorneo.getSelectedItem();
         boolean activo=jchbActivo.isEnabled();
         
-        Encuentros enc = new Encuentros(id_encuentro, fechaEnc, estadoEnCurso, ganador, jugador1, jugador2, estadio, torneo, activo);
-        encuentrosData.actualizarEncuentro(enc);
+        LocalDate fechaEncIni = torneo.getFecha_ini();
+        LocalDate fechaEncFi = torneo.getFecha_fin();
+        
+        try {
+
+            if (fechaEnc.isBefore(fechaEncIni) || fechaEnc.isAfter(fechaEncFi)){
+                JOptionPane.showMessageDialog(this, "La fecha del encuentro no esta en el rango del torneo, fecha inicio: "+fechaEncIni+" y fecha fin: "+fechaEncFi);
+            }
+            else {
+                 Encuentros enc = new Encuentros(id_encuentro, fechaEnc, estadoEnCurso, ganador, jugador1, jugador2, estadio, torneo, activo);
+               encuentrosData.actualizarEncuentro(enc);
+            }
+                
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "Usted ingresó mal la fecha");  
+        }  
         }
         else {
             JOptionPane.showMessageDialog(this,"No se encontraron datos");
@@ -493,7 +522,7 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         //Date fechaEncIn = (Date) Date.from(fechaEncIni.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
         LocalDate fechaEncFi = torneo.getFecha_fin();
         //Date fechaFi = (Date) Date.from(fechaEncFi.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-        System.out.println("Error");
+        System.out.println(fechaEncFi);
         try {
            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
            String fecha = formato.format(jdcFecha.getDate());
@@ -515,6 +544,11 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
     private void jdcFechaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jdcFechaMouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_jdcFechaMouseExited
+
+    private void jdcFechaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jdcFechaFocusGained
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jdcFechaFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

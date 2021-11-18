@@ -275,6 +275,7 @@
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jdcFecha">
       <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jdcFechaFocusGained"/>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jdcFechaFocusLost"/>
         <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jdcFechaMouseExited"/>
       </Events>

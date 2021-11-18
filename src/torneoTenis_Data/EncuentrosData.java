@@ -92,7 +92,7 @@ public class EncuentrosData {
             }
             ps.close();
         }catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, "ERROR \nSponsor no encontrado");
+            JOptionPane.showMessageDialog(null, "ERROR \nEncuentro no encontrado");
          }
         return enc; 
     }
@@ -136,13 +136,13 @@ public class EncuentrosData {
                 ps.executeUpdate();
 
             if(ps.executeUpdate()>0){
-                JOptionPane.showMessageDialog(null, "Ganador Actualizado Exitosamente");
+                JOptionPane.showMessageDialog(null, "Encuentro Actualizado Exitosamente");
             }else{
-                JOptionPane.showMessageDialog(null, "Error al Intentar Actualizar el Ganador");
+                JOptionPane.showMessageDialog(null, "Error al Intentar Actualizar encuentro");
              }
             ps.close();
         }catch (SQLException ex){
-                JOptionPane.showMessageDialog(null, "ERROR \nJugador No Encontrado");
+                JOptionPane.showMessageDialog(null, "ERROR \nEncuentro No Encontrado");
          }
     }
     
