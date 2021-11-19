@@ -75,6 +75,7 @@ public class EncuentrosData {
             ResultSet rst = ps.executeQuery();
             
             while(rst.next()){
+                enc = new Encuentros();
                 enc.setId_encuentro(rst.getInt("id_encuentro"));
                 enc.setFechaEnc(rst.getDate("fechaEnc").toLocalDate());
                 enc.setEstadoEnCurso(rst.getInt("estadoEnCurso"));
