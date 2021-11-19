@@ -101,6 +101,7 @@ public class VistaSponsorsXJugador extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtSponsors = new javax.swing.JTable();
         jlTitulo4 = new javax.swing.JLabel();
+        jbAnular = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -129,6 +130,13 @@ public class VistaSponsorsXJugador extends javax.swing.JInternalFrame {
 
         jlTitulo4.setText("Sponsors por Jugador");
 
+        jbAnular.setText("Anular Contrato");
+        jbAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAnularActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,7 +152,10 @@ public class VistaSponsorsXJugador extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlTitulo4)
-                            .addComponent(jcbJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jcbJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(193, 193, 193)
+                        .addComponent(jbAnular)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -158,7 +169,9 @@ public class VistaSponsorsXJugador extends javax.swing.JInternalFrame {
                     .addComponent(jlJugador))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jbAnular)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
@@ -169,9 +182,24 @@ public class VistaSponsorsXJugador extends javax.swing.JInternalFrame {
         cargarDatos();
     }//GEN-LAST:event_jcbJugadorActionPerformed
 
+    private void jbAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularActionPerformed
+        // TODO add your handling code here:
+         int filaSelect = jtSponsors.getSelectedRow();
+        
+        if (filaSelect !=-1) {
+            Jugador j = (Jugador) jcbJugador.getSelectedItem();
+            
+            int id_sponsor = (Integer)modelo.getValueAt(filaSelect, 0);
+            
+            pat.borrarPatrocinio(id_sponsor, j.getId_jugador());
+            borrarFilasTabla();
+        }
+    }//GEN-LAST:event_jbAnularActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbAnular;
     private javax.swing.JComboBox<Jugador> jcbJugador;
     private javax.swing.JLabel jlJugador;
     private javax.swing.JLabel jlTitulo4;

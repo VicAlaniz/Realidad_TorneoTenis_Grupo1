@@ -286,6 +286,7 @@ public class VistaJugador extends javax.swing.JInternalFrame {
             jcbEstilo.setSelectedItem(jugador.getEstilo()+"");
             jcbMano.setSelectedItem(jugador.getManoHabil()+"");
             jcbActivo.setSelected(jugador.isActivo());
+            jbGuardar.setEnabled(false);
         }else{
             JOptionPane.showMessageDialog(this,"No se encontraron datos");
         }
@@ -297,6 +298,11 @@ public class VistaJugador extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
+        if (jtNom.getText().isEmpty()||jtDni.getText().isEmpty()||jdFechaNac.getDate()==null||jtAltura.getText().isEmpty()
+                ||jtPeso.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Completar todos los campos");
+        }
+        else{
         String nombreApellido=jtNom.getText();
         int dni=Integer.parseInt(jtDni.getText());
         
@@ -314,6 +320,7 @@ public class VistaJugador extends javax.swing.JInternalFrame {
         
         jugadorData.registrarJugador(jugador);
         jtId.setText(jugador.getId_jugador() + "");
+        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
@@ -353,8 +360,8 @@ public class VistaJugador extends javax.swing.JInternalFrame {
         jtAltura.setText("");
         jtPeso.setText("");
         jcbActivo.setSelected(false);
-        jcbEstilo.setSelectedIndex(-1);
-        jcbMano.setSelectedIndex(-1);
+        jcbEstilo.setSelectedIndex(0);
+        jcbMano.setSelectedIndex(0);
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jtAlturaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtAlturaFocusLost

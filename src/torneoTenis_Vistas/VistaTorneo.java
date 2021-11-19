@@ -10,13 +10,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
-
 import torneoTenis_Data.TorneoData;
 import torneotenis.Conectar;
 import torneotenis.Jugador;
-import torneotenis.Resultado;
 import torneotenis.Torneo;
 
 
@@ -208,6 +205,10 @@ public class VistaTorneo extends javax.swing.JInternalFrame {
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
         if(jtId.getText()!=null){
+            if (jtNombre.getText().isEmpty()||jdcFechaIni.getDate()==null||jdcFechaFin.getDate()==null){
+            JOptionPane.showMessageDialog(this, "Completar todos los campos");
+        }
+        else {
             int id_torneo=Integer.parseInt(jtId.getText());
             String nombre = jtNombre.getText();
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -219,6 +220,7 @@ public class VistaTorneo extends javax.swing.JInternalFrame {
         
             Torneo torneo = new Torneo(id_torneo, nombre, fecha_ini, fecha_fin, activo);
             torneoData.actualizarTorneo(torneo);
+            }
         }else{
             JOptionPane.showMessageDialog(this,"No se encontraron datos");
         }
@@ -237,7 +239,7 @@ public class VistaTorneo extends javax.swing.JInternalFrame {
             jdcFechaIni.setDate(Date.valueOf(torneo.getFecha_ini()));
             jdcFechaFin.setDate(Date.valueOf(torneo.getFecha_fin()));
             jchbActivo.setSelected(torneo.isActivo());
-
+            jbGuardar.setEnabled(false);
         }else{
             JOptionPane.showMessageDialog(this,"No se encontraron datos");
         }
@@ -246,6 +248,11 @@ public class VistaTorneo extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
+        if (jtNombre.getText().isEmpty()||jdcFechaIni.getDate()==null||jdcFechaFin.getDate()==null){
+            JOptionPane.showMessageDialog(this, "Completar todos los campos");
+        }
+     
+        else {
         String nombre = jtNombre.getText();
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         String fechaI = formato.format(jdcFechaIni.getDate());
@@ -253,10 +260,14 @@ public class VistaTorneo extends javax.swing.JInternalFrame {
         String fechaF = formato.format(jdcFechaFin.getDate());
         LocalDate fecha_fin=LocalDate.parse(fechaF, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         boolean activo=jchbActivo.isEnabled();
-        
+        if (fecha_fin.isBefore(fecha_ini)){
+                JOptionPane.showMessageDialog(this, "La fecha fin del torneo no puede ser anterior a la fecha de inicio");
+            }
+        else{
         Torneo torneo = new Torneo(nombre, fecha_ini, fecha_fin, activo);
         torneoData.guardarTorneo(torneo);
-        jtId.setText(torneo.getId_torneo()+"");
+        jtId.setText(torneo.getId_torneo()+"");}
+        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void JbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JbEliminarActionPerformed

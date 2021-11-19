@@ -8,6 +8,7 @@ package torneoTenis_Vistas;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import static java.time.LocalDate.now;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -77,9 +78,9 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         }
     }
      public void borrarCombo() {
-        int a = jcbEst.getSelectedIndex()-1;
+        int a = jcbGanador.getSelectedIndex()-1;
         for (int i=a; i>=0; i--){
-            jcbEst.removeAllItems();
+            jcbGanador.removeAllItems();
         }
     }
 
@@ -178,6 +179,11 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
             }
         });
 
+        jdcFecha.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jdcFechaComponentAdded(evt);
+            }
+        });
         jdcFecha.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jdcFechaFocusGained(evt);
@@ -187,6 +193,9 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
             }
         });
         jdcFecha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jdcFechaMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jdcFechaMouseExited(evt);
             }
@@ -350,7 +359,7 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
                                     .addComponent(jcbJug1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(24, 24, 24))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jcbJug2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel7))
                                 .addGap(27, 27, 27)))
@@ -392,11 +401,12 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
- 
+        if (jcEstado.getText().isEmpty() ||jdcFecha.getDate()== null ){
+            JOptionPane.showMessageDialog(this, "Completar campos");
+        }
+       
+        else {
         int estadoEnCurso=Integer.parseInt(jcEstado.getText());
-        
-        
-        
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         String fecha = formato.format(jdcFecha.getDate());
         LocalDate fechaEnc=LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -410,11 +420,11 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         LocalDate fechaEncFi = torneo.getFecha_fin();
         
         try {
-
+            
             if (fechaEnc.isBefore(fechaEncIni) || fechaEnc.isAfter(fechaEncFi)){
                 JOptionPane.showMessageDialog(this, "La fecha del encuentro no esta en el rango del torneo, fecha inicio: "+fechaEncIni+" y fecha fin: "+fechaEncFi);
             }
-            if(estadoEnCurso < 1 || estadoEnCurso > 3){
+            else if(estadoEnCurso < 1 || estadoEnCurso > 3){
                 JOptionPane.showMessageDialog(this, "Valor de Estado incorrecto");}
             else {
                  Encuentros enc = new Encuentros(fechaEnc, estadoEnCurso, jugador1, jugador2, estadio, torneo, activo);
@@ -424,12 +434,16 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
                 
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(this, "Usted ingresó mal la fecha");  
-        }  
+        }  }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
         if(jtId.getText()!=null){
+        if (jcEstado.getText().isEmpty() ||jdcFecha.getDate()== null ){
+            JOptionPane.showMessageDialog(this, "Completar campos");
+        }
+        else{
         int id_encuentro = Integer.parseInt(jtId.getText());
         int estadoEnCurso=Integer.parseInt(jcEstado.getText());
         
@@ -439,7 +453,7 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         
         Jugador jugador1 = (Jugador) jcbJug1.getSelectedItem();
         Jugador jugador2 = (Jugador) jcbJug2.getSelectedItem();
-        Jugador ganador = (Jugador) jcbGanador.getSelectedItem();
+        
         Estadio estadio = (Estadio) jcbEst.getSelectedItem();
         Torneo torneo = (Torneo) jcbTorneo.getSelectedItem();
         boolean activo=jchbActivo.isEnabled();
@@ -452,15 +466,24 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
             if (fechaEnc.isBefore(fechaEncIni) || fechaEnc.isAfter(fechaEncFi)){
                 JOptionPane.showMessageDialog(this, "La fecha del encuentro no esta en el rango del torneo, fecha inicio: "+fechaEncIni+" y fecha fin: "+fechaEncFi);
             }
+            else if(estadoEnCurso < 1 || estadoEnCurso > 3){
+                JOptionPane.showMessageDialog(this, "Valor de Estado incorrecto");}
+            
             else {
-                 Encuentros enc = new Encuentros(id_encuentro, fechaEnc, estadoEnCurso, ganador, jugador1, jugador2, estadio, torneo, activo);
+                if(fechaEnc.isBefore(now())){
+               cargarDatosGanador();
+               Jugador ganador = (Jugador) jcbGanador.getSelectedItem();
+               Encuentros enc = new Encuentros(id_encuentro, fechaEnc, estadoEnCurso, ganador, jugador1, jugador2, estadio, torneo, activo);
                encuentrosData.actualizarEncuentro(enc);
-            }
-                
+            }else{
+               Encuentros enc = new Encuentros(id_encuentro, fechaEnc, estadoEnCurso, jugador1, jugador2, estadio, torneo, activo);
+               encuentrosData.actualizarEncuentroSinGanador(enc);
+                }
+            } 
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(this, "Usted ingresó mal la fecha");  
         }  
-        }
+        }}
         else {
             JOptionPane.showMessageDialog(this,"No se encontraron datos");
         }
@@ -479,10 +502,12 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         jdcFecha.setDate(null);
         jchbActivo.setSelected(false);
         jcbGanador.setSelectedIndex(-1);
-        jcbJug1.setSelectedIndex(-1);
-        jcbJug2.setSelectedIndex(-1);
-        jcbEst.setSelectedIndex(-1);
-        jcbTorneo.setSelectedIndex(-1);
+        jcbJug1.setSelectedIndex(0);
+        jcbJug2.setSelectedIndex(0);
+        jcbEst.setSelectedIndex(0);
+        jcbTorneo.setSelectedIndex(0);
+        jcbGanador.removeAllItems();
+        jbGuardar.setEnabled(true);
         
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
@@ -493,18 +518,25 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
         Encuentros enc = encuentrosData.buscarEncuentro(id);
        
         if(enc != null) {
-           
             jtId.setText(enc.getId_encuentro()+"");
             jcEstado.setText(enc.getEstadoEnCurso()+"");
             jdcFecha.setDate(Date.valueOf(enc.getFechaEnc()));
             jcbJug1.setSelectedItem(enc.getJugador1());
             jcbJug2.setSelectedItem(enc.getJugador2());
-            jcbGanador.setSelectedItem(enc.getGanador());
+            //jcbGanador.setSelectedItem(enc.getGanador());
             jcbEst.setSelectedItem(enc.getEstadio());
             jcbTorneo.setSelectedItem(enc.getTorneo());
             jchbActivo.setSelected(enc.isActivo());
-            cargarDatosGanador();
-        }else{
+            jbGuardar.setEnabled(false);
+            if(enc.getFechaEnc().isBefore(now())&&jcbGanador!=null){
+                cargarDatosGanador();
+                jcbGanador.setSelectedItem(enc.getGanador());
+                
+            }
+            else {
+                jcbGanador.setSelectedIndex(-1);
+            }}
+        else{
             JOptionPane.showMessageDialog(this,"No se encontraron datos");
         }      
     }//GEN-LAST:event_jbBuscarActionPerformed
@@ -540,30 +572,7 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtIdFocusLost
 
     private void jdcFechaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jdcFechaFocusLost
-        // TODO add your handling code here:
-        Torneo torneo = (Torneo) jcbTorneo.getSelectedItem();
-        
-        LocalDate fechaEncIni = torneo.getFecha_ini();
-        //Date fechaEncIn = (Date) Date.from(fechaEncIni.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-        LocalDate fechaEncFi = torneo.getFecha_fin();
-        //Date fechaFi = (Date) Date.from(fechaEncFi.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-        System.out.println(fechaEncFi);
-        try {
-           SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-           String fecha = formato.format(jdcFecha.getDate());
-           LocalDate fechaEnc=LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-
-            if (fechaEnc.isBefore(fechaEncIni) || fechaEnc.isAfter(fechaEncFi)){
-                JOptionPane.showMessageDialog(this, "La fecha del encuentro no esta en el rango del torneo, fecha inicio: "+fechaEncIni+" y fecha fin: "+fechaEncFi);
-            }
-            else {
-                System.out.println("Error");
-            }
-                
-        } catch (NumberFormatException nf) {
-            JOptionPane.showMessageDialog(this, "Usted ingresó mal la fecha");
-            jdcFecha.requestFocus();
-        }
+    
     }//GEN-LAST:event_jdcFechaFocusLost
 
     private void jdcFechaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jdcFechaMouseExited
@@ -576,8 +585,16 @@ public class VistaEncuentros extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jdcFechaFocusGained
 
     private void jcEstadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jcEstadoFocusLost
-    
+  
     }//GEN-LAST:event_jcEstadoFocusLost
+
+    private void jdcFechaComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jdcFechaComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jdcFechaComponentAdded
+
+    private void jdcFechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jdcFechaMouseClicked
+
+    }//GEN-LAST:event_jdcFechaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

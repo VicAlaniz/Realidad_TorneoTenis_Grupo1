@@ -39,6 +39,7 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
         patrocinioData = new PatrocinioData(conn);
         cargarJugadores();
         cargarSponsors();
+        jbGuardarPat.setEnabled(false);
     }
 
     public void cargarJugadores(){
@@ -87,6 +88,7 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jchbActivoP = new javax.swing.JCheckBox();
         jbBuscar = new javax.swing.JButton();
+        jbLimpiar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -135,7 +137,19 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Jugador:");
 
+        jcbJugador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbJugadorMouseClicked(evt);
+            }
+        });
+
         jtIdPat.setEditable(false);
+
+        jcbSponsor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbSponsorMouseClicked(evt);
+            }
+        });
 
         jbGuardarPat.setText("Firmar Contrato");
         jbGuardarPat.addActionListener(new java.awt.event.ActionListener() {
@@ -153,13 +167,20 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
             }
         });
 
+        jbLimpiar.setText("Limpiar Campos");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,18 +204,16 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
                                 .addComponent(jchbActivo)
                                 .addComponent(jtIndumentaria))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jbGuardarSpon)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(44, 44, 44)
-                                .addComponent(jbBuscar)))
+                            .addComponent(jbBuscar))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbEliminarSpon, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbActualizar))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,14 +237,18 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jchbActivoP)
                                             .addComponent(jcbJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(0, 83, Short.MAX_VALUE))
+                                .addGap(0, 77, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel10)
-                                .addContainerGap(319, Short.MAX_VALUE))))
+                                .addContainerGap(313, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbGuardarPat)
-                        .addGap(128, 128, 128))))
+                        .addComponent(jbLimpiar)
+                        .addGap(27, 27, 27))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbGuardarPat)
+                .addGap(131, 131, 131))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,21 +286,23 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
                             .addComponent(jchbActivoP))))
+                .addGap(22, 22, 22)
+                .addComponent(jbGuardarPat)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbGuardarSpon)
+                    .addComponent(jbActualizar))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbGuardarSpon)
-                            .addComponent(jbActualizar))
-                        .addGap(18, 18, 18))
+                            .addComponent(jbBuscar)
+                            .addComponent(jbEliminarSpon))
+                        .addContainerGap(23, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbGuardarPat)
-                        .addGap(37, 37, 37)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbEliminarSpon)
-                    .addComponent(jbBuscar))
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbLimpiar)
+                        .addGap(33, 33, 33))))
         );
 
         pack();
@@ -285,6 +310,10 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
 
     private void jbGuardarSponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarSponActionPerformed
         // TODO add your handling code here:
+        if (jtMarca.getText().isEmpty()||jtIndumentaria.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Completar todos los campos");
+        }
+        else{
         String marca = jtMarca.getText();
         String indumentaria = jtIndumentaria.getText();
         boolean activo=jchbActivo.isEnabled();
@@ -292,12 +321,16 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
         Sponsor sponsor = new Sponsor(marca, indumentaria, activo);
         sponsorData.guardarSponsor(sponsor);
         jtIdSpon.setText(sponsor.getId_sponsor()+"");
-        
+        }
     }//GEN-LAST:event_jbGuardarSponActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
         if(jtIdSpon.getText()!=null){
+        if (jtMarca.getText().isEmpty()||jtIndumentaria.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Completar todos los campos");
+        }
+        else{
             int id_sponsor=Integer.parseInt(jtIdSpon.getText());
             String marca = jtMarca.getText();
             String indumentaria = jtIndumentaria.getText();
@@ -305,7 +338,7 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
         
             Sponsor sponsor = new Sponsor(id_sponsor, marca, indumentaria, activo);
             sponsorData.actualizarSponsor(sponsor);
-        }else{
+        }}else{
             JOptionPane.showMessageDialog(this,"No se encontraron datos");
         }
     }//GEN-LAST:event_jbActualizarActionPerformed
@@ -318,6 +351,7 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
 
     private void jbGuardarPatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarPatActionPerformed
         // TODO add your handling code here:
+        
         Sponsor sponsor = (Sponsor) jcbSponsor.getSelectedItem();
         Jugador jugador = (Jugador) jcbJugador.getSelectedItem();
         boolean activo = jchbActivoP.isEnabled();
@@ -340,10 +374,34 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
             jtMarca.setText(sponsor.getMarca() + "");
             jtIndumentaria.setText(sponsor.getIndumentaria() + "");
             jchbActivo.setSelected(sponsor.isActivo());
+            jbGuardarSpon.setEnabled(false);
         }else{
             JOptionPane.showMessageDialog(this, "No hay Sponsor con esos datos");
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jcbSponsorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbSponsorMouseClicked
+        // TODO add your handling code here:
+        jbGuardarPat.setEnabled(true);
+    }//GEN-LAST:event_jcbSponsorMouseClicked
+
+    private void jcbJugadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbJugadorMouseClicked
+        // TODO add your handling code here:
+        jbGuardarPat.setEnabled(true);
+    }//GEN-LAST:event_jcbJugadorMouseClicked
+
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+        // TODO add your handling code here:
+        jtIdSpon.setText("");
+        jtMarca.setText("");
+        jtIndumentaria.setText("");
+        jchbActivo.setSelected(false);
+        jtIdPat.setText("");
+        jchbActivoP.setSelected(false);
+        jcbSponsor.setSelectedIndex(0);
+        jcbJugador.setSelectedIndex(0);
+        jbGuardarPat.setEnabled(false);
+    }//GEN-LAST:event_jbLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -363,6 +421,7 @@ public class VistaSponsorPatrocinio extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbEliminarSpon;
     private javax.swing.JButton jbGuardarPat;
     private javax.swing.JButton jbGuardarSpon;
+    private javax.swing.JButton jbLimpiar;
     private javax.swing.JComboBox<Jugador> jcbJugador;
     private javax.swing.JComboBox<Sponsor> jcbSponsor;
     private javax.swing.JCheckBox jchbActivo;

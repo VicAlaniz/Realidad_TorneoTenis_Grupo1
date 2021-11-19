@@ -297,6 +297,7 @@ public class VistaEstadio extends javax.swing.JInternalFrame {
             jtDireccion.setText(estadio.getDireccion()+"");
             jtCapacidad.setText(estadio.getCapacidad()+"");
             jchbActivo.setSelected(estadio.isActivo());
+            jbGuardar.setEnabled(false);
         }else{
             JOptionPane.showMessageDialog(this,"No se encontraron datos");
         }
@@ -304,7 +305,11 @@ public class VistaEstadio extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-               
+        if (jtNombre.getText().isEmpty() ||jtCiudad.getText().isEmpty()||jtAncho.getText().isEmpty()||
+                jtLargo.getText().isEmpty()||jtDireccion.getText().isEmpty()||jtCapacidad.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Completar campos");
+        }   
+        else {
         String nombre = jtNombre.getText();
         String ciudad = jtCiudad.getText();
         float ancho = Float.parseFloat(jtAncho.getText());
@@ -318,11 +323,17 @@ public class VistaEstadio extends javax.swing.JInternalFrame {
         Estadio estadio = new Estadio(nombre, ciudad, ancho, largo, categoria, habilitado, direccion, capacidad, activo);
         estadioData.guardarEstadio(estadio);
         jtId.setText(estadio.getId_estadio()+"");
+        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         // TODO add your handling code here:
         if(jtId.getText()!=null){
+          if (jtNombre.getText().isEmpty() ||jtCiudad.getText().isEmpty()||jtAncho.getText().isEmpty()||
+                jtLargo.getText().isEmpty()||jtDireccion.getText().isEmpty()||jtCapacidad.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Completar campos");
+        }   
+        else {
             int id_estadio=Integer.parseInt(jtId.getText());
             String nombre = jtNombre.getText();
             String ciudad = jtCiudad.getText();
@@ -336,7 +347,7 @@ public class VistaEstadio extends javax.swing.JInternalFrame {
         
             Estadio estadio = new Estadio(id_estadio, nombre, ciudad, ancho, largo, categoria, habilitado, direccion, capacidad, activo);
             estadioData.actualizarEstadio(estadio);
-        }else{
+        }}else{
             JOptionPane.showMessageDialog(this,"No se encontraron datos");
         }
         
@@ -359,7 +370,7 @@ public class VistaEstadio extends javax.swing.JInternalFrame {
         jtDireccion.setText("");
         jtCapacidad.setText("");
         jchbActivo.setSelected(false);
-        jcbCategoria.setSelectedIndex(-1);
+        jcbCategoria.setSelectedIndex(0);
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jtAnchoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtAnchoFocusLost

@@ -45,7 +45,7 @@ public class EncuentrosData {
             PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setDate(1, Date.valueOf(enc.getFechaEnc()));
             ps.setInt(2, enc.getEstadoEnCurso());
-            //ps.setInt(3, enc.getGanador().getId_jugador());
+          
             ps.setInt(3, enc.getJugador1().getId_jugador());
             ps.setInt(4, enc.getJugador2().getId_jugador());
             ps.setInt(5, enc.getEstadio().getId_estadio());
@@ -132,6 +132,33 @@ public class EncuentrosData {
             ps.setInt(7, enc.getTorneo().getId_torneo());
             ps.setBoolean(8, enc.isActivo());
             ps.setInt(9, enc.getId_encuentro());
+                
+                ps.executeUpdate();
+
+            if(ps.executeUpdate()>0){
+                JOptionPane.showMessageDialog(null, "Encuentro Actualizado Exitosamente");
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al Intentar Actualizar encuentro");
+             }
+            ps.close();
+        }catch (SQLException ex){
+                JOptionPane.showMessageDialog(null, "ERROR \nEncuentro No Encontrado");
+         }
+    }
+    public void actualizarEncuentroSinGanador(Encuentros enc){
+         String query = "UPDATE encuentros SET fechaEnc = ?, estadoEnCurso = ?, id_jugador1 = ?, id_jugador2 = ?, id_estadio = ?, id_torneo = ?, activo = ?  WHERE id_encuentro = ?";
+        try{
+            PreparedStatement ps = conn.prepareStatement(query);
+                
+            ps.setDate(1, Date.valueOf(enc.getFechaEnc()));
+            ps.setInt(2, enc.getEstadoEnCurso());
+            
+            ps.setInt(3, enc.getJugador1().getId_jugador());
+            ps.setInt(4, enc.getJugador2().getId_jugador());
+            ps.setInt(5, enc.getEstadio().getId_estadio());
+            ps.setInt(6, enc.getTorneo().getId_torneo());
+            ps.setBoolean(7, enc.isActivo());
+            ps.setInt(8, enc.getId_encuentro());
                 
                 ps.executeUpdate();
 
