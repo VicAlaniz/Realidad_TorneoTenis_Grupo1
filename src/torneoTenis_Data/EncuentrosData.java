@@ -66,7 +66,7 @@ public class EncuentrosData {
     }
     
     public Encuentros buscarEncuentro(int id){
-         Encuentros enc = new Encuentros();
+         Encuentros enc = null;
         
         String query = "SELECT * FROM encuentros WHERE id_encuentro = ?";
         try{
@@ -88,7 +88,7 @@ public class EncuentrosData {
                 enc.setEstadio(es);
                 Torneo tor = td.buscarTorneoXId(rst.getInt("id_torneo"));
                 enc.setTorneo(tor);
-                enc.setActivo(true);
+                enc.setActivo(rst.getBoolean("activo"));
             }
             ps.close();
         }catch (SQLException ex){
