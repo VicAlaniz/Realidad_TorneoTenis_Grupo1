@@ -327,5 +327,37 @@ public class EncuentrosData {
         }
         return listaDeEncuentrosFuturos;
     }  
+   public List<Encuentros> listaEncuentrosXTorneo(int id_torneo){
+        
+        ArrayList<Encuentros> listaDeEncuentrosXTorneo = new ArrayList<>();
+        
+        String query = "SELECT encuentros.id_encuentro, encuentros.fechaEnc, encuentros.id_jugador1, encuentros.id_jugador2 "
+                + "FROM encuentros, torneos "
+                + "WHERE encuentros.id_torneo = ? "
+                + "AND torneos.id_torneo = encuentros.id_torneo ";
+         
+        
+            try{
+            PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id_torneo);
+            
+            ResultSet rs = ps.executeQuery();
+                         
+           while(rs.next()){
+                Encuentros e = new Encuentros();
+                e.setId_encuentro(rs.getInt("id_encuentro"));
+                e.setFechaEnc(rs.getDate("fechaEnc").toLocalDate());
+                Jugador j1 = jd.buscarJugadorXId(rs.getInt("id_jugador1"));
+                e.setJugador1(j1);
+                Jugador j2 = jd.buscarJugadorXId(rs.getInt("id_jugador2"));
+                e.setJugador2(j2); 
+                listaDeEncuentrosXTorneo.add(e);
+            }
+            ps.close();
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "ERROR \nTorneo sin encuentros");
+         }
+        return listaDeEncuentrosXTorneo;  
+    }
    
 }

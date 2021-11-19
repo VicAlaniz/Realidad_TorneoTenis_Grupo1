@@ -54,6 +54,7 @@ public class VistasGeneral extends javax.swing.JFrame {
         jmTorJug = new javax.swing.JMenuItem();
         jmSponXJug = new javax.swing.JMenuItem();
         jmJugXSpon = new javax.swing.JMenuItem();
+        jmEncXTor = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -166,6 +167,14 @@ public class VistasGeneral extends javax.swing.JFrame {
             }
         });
         jmConsultas.add(jmJugXSpon);
+
+        jmEncXTor.setText("Encuentros por Torneo");
+        jmEncXTor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmEncXTorActionPerformed(evt);
+            }
+        });
+        jmConsultas.add(jmEncXTor);
 
         jMenu.add(jmConsultas);
 
@@ -332,6 +341,19 @@ public class VistasGeneral extends javax.swing.JFrame {
         vjs.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         esc.moveToFront(vjs);
     }//GEN-LAST:event_jmJugXSponActionPerformed
+
+    private void jmEncXTorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmEncXTorActionPerformed
+        // TODO add your handling code here:
+        esc.removeAll();
+        esc.repaint();
+        VistaEncuentrosXTorneo vet = new VistaEncuentrosXTorneo();
+        vet.setVisible(true);
+        esc.add(vet);
+        Dimension desktopSize = esc.getSize();
+        Dimension FrameSize = vet.getSize();
+        vet.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        esc.moveToFront(vet);
+    }//GEN-LAST:event_jmEncXTorActionPerformed
                       
     /**
      * @param args the command line arguments
@@ -373,6 +395,7 @@ public class VistasGeneral extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenu;
     private javax.swing.JMenu jmCarga;
     private javax.swing.JMenu jmConsultas;
+    private javax.swing.JMenuItem jmEncXTor;
     private javax.swing.JMenuItem jmEncuentros;
     private javax.swing.JMenuItem jmEstadio;
     private javax.swing.JMenuItem jmFutEnc;

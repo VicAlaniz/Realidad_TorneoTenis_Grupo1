@@ -249,18 +249,18 @@ public class TorneoData {
    public List<Resultado> calcularRanking(int id_torneo){
         ArrayList<Resultado> listaDeGanadores = new ArrayList<>();
         
-        String query = "SELECT r.ganador, r.id_torneo, (SUM(r.cant_puntos) + SUM(r.cant_pat)) AS total "
-                + "FROM (SELECT  ganador, id_torneo, 3 AS cant_puntos, 1 AS cant_pat "
-                + "FROM encuentros, patrocinio "
-                + "WHERE patrocinio.id_jugador = encuentros.ganador "
-                + "AND id_torneo = ? "
-                + "AND patrocinio.activo = 1 "
-                + "AND ganador <> 'null') AS r "
-                + "GROUP BY r.ganador, r.id_torneo ";
+        String query = "SELECT r.ganador, r.id_torneo, (SUM(r.cant_puntos) + SUM(p.cant_pat)) AS total "
+                + "FROM (SELECT  ganador, id_torneo, 3 AS cant_puntos FROM encuentros WHERE id_torneo = ? "
+                + "AND ganador <> 'null') AS r LEFT JOIN (SELECT  ganador, id_torneo, SUM(CASE WHEN patrocinio.activo is null THEN 0 ELSE patrocinio.activo END) AS cant_pat "
+                + "FROM encuentros LEFT JOIN patrocinio ON patrocinio.id_jugador = encuentros.ganador "
+                + "WHERE id_torneo = ? AND ganador <> 'null' "
+                + "GROUP BY ganador, id_torneo) AS p ON r.ganador = p.ganador AND r.id_torneo = p.id_torneo "
+                + "GROUP BY r.ganador, r.id_torneo ORDER BY `total` DESC ";
         
         try{
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, id_torneo);
+            ps.setInt(2, id_torneo);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
